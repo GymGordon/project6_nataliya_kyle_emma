@@ -1,0 +1,40 @@
+{
+  "UserKey" : {
+    "noteHistory" : {
+      "KeyId" : {
+        "date" : "date",
+        "note" : "text"
+      }
+    },
+    "routines" : {
+  
+      "routine1" : {
+        "day1" : {
+          "exercise1" : {
+            "set1" : {
+              "completed" : false,
+              "reps" : 10,
+              "weight" : 50
+            }
+          },
+          "exercise2" : {
+            "set1" : {
+              "completed" : false,
+              "reps" : 8,
+              "weight" : 45
+            }
+          }
+        },
+        "day2" : {
+          "exercise1" : {
+            "set1" : {
+              "completed" : false,
+              "reps" : 5,
+              "weight" : 100
+            }
+          }
+        }
+      }
+    }
+  }
+}
