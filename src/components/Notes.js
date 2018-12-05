@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import firebase from "./components/firebase";
+import firebase from "./firebase";
 
 
 class Notes extends Component {
