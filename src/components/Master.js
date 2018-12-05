@@ -8,13 +8,13 @@ import Workouts from "./Workouts";
 import Exercises from "./Exercises";
 import Notes from "./Notes";
 import Logs from "./Logs";
-import {Route, Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 const dbRef = firebase.database().ref();
 const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
-// PURPOSE OF MASTER : 
+// PURPOSE OF MASTER :
 // handle loging in and out
 // rendering routes
 
@@ -22,7 +22,13 @@ class Master extends Component {
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      routine: {
+          routineName: "",
+          exercises: {
+              exerciseName: ""
+          },
+      },
     };
   }
 
@@ -60,11 +66,27 @@ class Master extends Component {
     });
   };
 
+//   handleSubmit = (e) => {
+//     e.preventDefault();
+//     console.log("clicked add workout");
+//   };
+
+  handleChange = e => {
+    this.setState({
+        routine: {
+            [e.target.id]: e.target.value
+        }
+    });
+  };
+
   render() {
     return (
       <div>
         <Route path="/dashboard" render={() => <Dashboard />} />
-        <Route path="/addworkouts" render={() => <AddWorkouts />} />
+        <Route
+          path="/addworkouts"
+          render={() => <AddWorkouts handleChange={this.handleChange} />}
+        />
         <Route path="/addexercises" render={() => <AddExercises />} />
         <Route path="/workouts" render={() => <Workouts />} />
         <Route path="/exercises" render={() => <Exercises />} />
