@@ -13,8 +13,7 @@ class Dashboard extends Component {
         return (
             <div>
                 <h1>DASHBOARD</h1>
-                <button>ADD ROUTINE</button>
-                <Link to="/addworkouts">Add Workouts</Link>                
+                <Link to="/addworkouts">Add Routine</Link>                
             </div>
         )
     }
