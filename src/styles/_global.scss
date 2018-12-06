@@ -1,0 +1,62 @@
+
+$headingText: 'Bowlby One SC', cursive;
+$bodyText: 'Nunito', sans-serif;
+
+$mainColor1: #3b3b3b;
+$mainColor2: #006882;
+$accentColor: #a4e000;
+
+html {
+  font-size: 62.5%;
+}
+
+.App {
+  text-align: center;
+}
+
+body {
+  font-size: 1.8rem;
+  font-family: $bodyText;
+}
+
+header {
+  padding: 10px 0;
+}
+
+.wrapper {
+  width: 95vw;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+
+h1, h2, h3 {
+    font-family: $headingText;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin: 10px 0 20px 0;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin: 10px 0;
+}
+
+input {
+  padding: 2px 5px;
+  text-align: center;
+}
+
+input[type="submit"] {
+  display: block;
+  margin: 10px auto;
+}
+
