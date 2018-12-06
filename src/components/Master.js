@@ -22,7 +22,8 @@ class Master extends Component {
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      exerciseCounter: 1
     };
   }
 
@@ -38,7 +39,6 @@ class Master extends Component {
             this.dbRef = firebase.database().ref(`/${this.state.user.uid}`);
           }
         );
-        // redirect to Dash
       }
     });
   }
@@ -62,28 +62,35 @@ class Master extends Component {
 
   addRoutine = e => {
     e.preventDefault();
-    console.log("adding routine function");
     const newRoutine = {
       routineName: this.state.routineName
     };
     //pushing the routine object under the uid
-    this.dbRef.push(newRoutine);
-    this.props.history.push("/addexercises");
-    // const newDiaryEntry = { date: new Date().toDateString(), body: this.state.newEntry };
+    const routineKey = this.dbRef.push(newRoutine).key;
+    //redirecting the user to go to Add Exercises page
+    this.props.history.push(`/addexercises/${routineKey}`);
   };
 
-  addExercise = e => {
+  saveWorkout = e => {
+    // writing to firebase: the exercises (name, rep, set) + workout title
     e.preventDefault();
+    const routineKey = e.target.id;
+    // setting the workout title to the input value
     const newWorkout = {
       workoutTitle: this.state.workoutTitle
-    }
-    
-    const newExercise = {
-      exerciseName: this.state.exerciseName,
-      exerciseSets: this.state.exerciseSets,
-      exerciseReps: this.state.exerciseReps
     };
-    this.dbRef.push(newExercise);
+    firebase
+      .database()
+      .ref(`/${this.state.user.uid}/${routineKey}`)
+      .push(newWorkout);
+  };
+
+  addExercise = (e) => {
+    // add additional exercise form to page + saving to state
+    e.preventDefault();
+    this.setState({
+      exerciseCounter: this.state.exerciseCounter + 1
+    });
   };
 
   handleChange = e => {
@@ -107,11 +114,13 @@ class Master extends Component {
           )}
         />
         <Route
-          path="/addexercises"
+          path="/addexercises/:routineKey"
           render={() => (
             <AddExercises
               handleChange={this.handleChange}
+              saveWorkout={this.saveWorkout}
               addExercise={this.addExercise}
+              exerciseCounter={this.state.exerciseCounter}
             />
           )}
         />

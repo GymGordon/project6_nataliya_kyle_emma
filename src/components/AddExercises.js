@@ -1,12 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
+import ExerciseForm from "./ExerciseForm";
 
 class AddExercises extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
+
+    const exerciseForms =[]
+    for (let i = 0; i < this.props.exerciseCounter; i++) {
+      exerciseForms.push(<ExerciseForm />)
+    }
+
     return (
       <section className="addExercises">
         <h2>Add Exercises</h2>
-        <form onSubmit={this.props.addExercise}>
+        <form
+          onSubmit={this.props.saveWorkout}
+          id={this.props.match.params.routineKey}
+        >
           <label htmlFor="workoutTitle">Workout Title</label>
           <input
             onChange={this.props.handleChange}
@@ -16,31 +30,18 @@ class AddExercises extends Component {
           />
 
           <label htmlFor="exerciseName">Exercise</label>
-          <input
-            onChange={this.props.handleChange}
-            type="text"
-            id="exerciseName"
-          />
-
           <label htmlFor="exerciseSets">Sets</label>
-          <input
-            onChange={this.props.handleChange}
-            type="text"
-            id="exerciseSets"
-          />
-
           <label htmlFor="exerciseReps">Reps</label>
-          <input
-            onChange={this.props.handleChange}
-            type="text"
-            id="exerciseReps"
-          />
 
-          <input type="submit" value="Add Exercise" />
+          {exerciseForms}
+        
+          <button onClick={this.props.addExercise}>Add Exercise</button>
+
+          <input type="submit" value="Save Workout" />
         </form>
       </section>
     );
   }
 }
 
-export default AddExercises;
+export default withRouter(AddExercises);
