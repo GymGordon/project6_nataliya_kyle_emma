@@ -22,15 +22,7 @@ class Master extends Component {
   constructor() {
     super();
     this.state = {
-      user: null,
-      routines: {}
-    //   routine: {
-    //     routineName: "",
-    //     workout: {
-    //       workoutTitle: "",
-    //       exercises: {}
-    //     }
-    //   }
+      user: null
     };
   }
 
@@ -68,58 +60,38 @@ class Master extends Component {
     });
   };
 
-  handleSubmit = e => {
+  addRoutine = e => {
     e.preventDefault();
+    console.log("adding routine function");
+    const newRoutine = {
+      routineName: this.state.routineName
+    };
+    //pushing the routine object under the uid
+    this.dbRef.push(newRoutine);
     this.props.history.push("/addexercises");
+    // const newDiaryEntry = { date: new Date().toDateString(), body: this.state.newEntry };
   };
 
-  test = e => {
+  addExercise = e => {
     e.preventDefault();
-    this.routineName = e.target.children[1].value;
-
-    this.setState({
-        routines: {
-            ...this.state.routines,
-            [this.routineName]: {}
-        }
-    });
-      this.props.history.push("/addexercises");
+    const newWorkout = {
+      workoutTitle: this.state.workoutTitle
+    }
+    
+    const newExercise = {
+      exerciseName: this.state.exerciseName,
+      exerciseSets: this.state.exerciseSets,
+      exerciseReps: this.state.exerciseReps
+    };
+    this.dbRef.push(newExercise);
   };
 
-  //   handleChangeRoutine = e => {
-  //     this.setState({
-  //       routine: {
-  //         ...this.state.routine,
-  //         [e.target.id]: e.target.value
-  //       }
-  //     });
-  //   };
-
-  //   handleChangeWorkoutTitle = e => {
-  //     this.setState({
-  //       routine: {
-  //         ...this.state.routine,
-  //         workout: {
-  //           [e.target.id]: e.target.value
-  //         }
-  //       }
-  //     });
-  //   };
-
-  //   handleChangeExercise = e => {
-  //     this.setState({
-  //       routine: {
-  //         ...this.state.routine,
-  //         workout: {
-  //           ...this.state.routine.workout,
-  //           exercises: {
-  //             ...this.state.routine.workout.exercises,
-  //             [e.target.id]: e.target.value
-  //           }
-  //         }
-  //       }
-  //     });
-  //   };
+  handleChange = e => {
+    this.setState({
+      ...this.state,
+      [e.target.id]: e.target.value
+    });
+  };
 
   render() {
     return (
@@ -129,9 +101,8 @@ class Master extends Component {
           path="/addworkouts"
           render={() => (
             <AddWorkouts
-              handleChangeRoutine={this.handleChangeRoutine}
-              //   handleSubmit={this.handleSubmit}
-              test={this.test}
+              handleChange={this.handleChange}
+              addRoutine={this.addRoutine}
             />
           )}
         />
@@ -139,8 +110,8 @@ class Master extends Component {
           path="/addexercises"
           render={() => (
             <AddExercises
-              handleChangeExercise={this.handleChangeExercise}
-              handleChangeWorkoutTitle={this.handleChangeWorkoutTitle}
+              handleChange={this.handleChange}
+              addExercise={this.addExercise}
             />
           )}
         />

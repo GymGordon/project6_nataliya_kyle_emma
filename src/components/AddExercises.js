@@ -6,10 +6,10 @@ class AddExercises extends Component {
     return (
       <section className="addExercises">
         <h2>Add Exercises</h2>
-        <form>
-          <label htmlFor="workoutTitle" className="visuallyhidden">Workout Title</label>
+        <form onSubmit={this.props.addExercise}>
+          <label htmlFor="workoutTitle">Workout Title</label>
           <input
-            onChange={this.props.handleChangeWorkoutTitle}
+            onChange={this.props.handleChange}
             type="text"
             id="workoutTitle"
             placeholder="Workout Title"
@@ -17,21 +17,21 @@ class AddExercises extends Component {
 
           <label htmlFor="exerciseName">Exercise</label>
           <input
-            onChange={this.props.handleChangeExercise}
+            onChange={this.props.handleChange}
             type="text"
             id="exerciseName"
           />
 
           <label htmlFor="exerciseSets">Sets</label>
           <input
-            onChange={this.props.handleChangeExercise}
+            onChange={this.props.handleChange}
             type="text"
             id="exerciseSets"
           />
 
           <label htmlFor="exerciseReps">Reps</label>
           <input
-            onChange={this.props.handleChangeExercise}
+            onChange={this.props.handleChange}
             type="text"
             id="exerciseReps"
           />
