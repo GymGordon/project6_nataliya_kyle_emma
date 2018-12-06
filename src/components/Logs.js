@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 class Logs extends Component {
     render() {
         return (
-            <div>
+            <section className="logs">
                 <h1>Workout Logs</h1>
-            </div>
+            </section>
         )
     }
 }

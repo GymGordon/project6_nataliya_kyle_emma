@@ -6,8 +6,8 @@ import firebase from "./firebase";
 class Notes extends Component {
     render() {
         return (
-            <div>
-                <h1>Notes</h1>
+            <div className="notes">
+                <h2>Notes</h2>
             </div>
         )
     }
