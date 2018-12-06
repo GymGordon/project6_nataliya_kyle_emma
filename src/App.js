@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.scss";
-import firebase from "firebase"
+import firebase from "firebase";
 import {
   BrowserRouter as Router,
   Route,
@@ -16,7 +16,6 @@ const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
 class App extends Component {
-
   componentWillUnmount() {
     if (this.dbRef) {
       this.dbRef.off();
@@ -24,15 +23,14 @@ class App extends Component {
   }
 
   render() {
-
     // router
     // render master
 
     return (
       <Router>
         <div className="App">
-          <Master />
-       </div>
+          <Master history={this.props.history} />
+        </div>
       </Router>
     );
   }

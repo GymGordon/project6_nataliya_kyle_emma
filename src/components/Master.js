@@ -8,7 +8,7 @@ import Workouts from "./Workouts";
 import Exercises from "./Exercises";
 import Notes from "./Notes";
 import Logs from "./Logs";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
 
 const dbRef = firebase.database().ref();
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -23,12 +23,14 @@ class Master extends Component {
     super();
     this.state = {
       user: null,
-      routine: {
-          routineName: "",
-          exercises: {
-              exerciseName: ""
-          },
-      },
+      routines: {}
+    //   routine: {
+    //     routineName: "",
+    //     workout: {
+    //       workoutTitle: "",
+    //       exercises: {}
+    //     }
+    //   }
     };
   }
 
@@ -66,18 +68,60 @@ class Master extends Component {
     });
   };
 
-//   handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log("clicked add workout");
-//   };
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.history.push("/addexercises");
+  };
 
-  handleChange = e => {
+  test = e => {
+    e.preventDefault();
+    this.routineName = e.target.children[1].value;
+
     this.setState({
-        routine: {
-            [e.target.id]: e.target.value
+        routines: {
+            ...this.state.routines,
+            [this.routineName]: {}
+            
         }
+    }, () => {
+        this.routineName = ""
     });
   };
+
+  //   handleChangeRoutine = e => {
+  //     this.setState({
+  //       routine: {
+  //         ...this.state.routine,
+  //         [e.target.id]: e.target.value
+  //       }
+  //     });
+  //   };
+
+  //   handleChangeWorkoutTitle = e => {
+  //     this.setState({
+  //       routine: {
+  //         ...this.state.routine,
+  //         workout: {
+  //           [e.target.id]: e.target.value
+  //         }
+  //       }
+  //     });
+  //   };
+
+  //   handleChangeExercise = e => {
+  //     this.setState({
+  //       routine: {
+  //         ...this.state.routine,
+  //         workout: {
+  //           ...this.state.routine.workout,
+  //           exercises: {
+  //             ...this.state.routine.workout.exercises,
+  //             [e.target.id]: e.target.value
+  //           }
+  //         }
+  //       }
+  //     });
+  //   };
 
   render() {
     return (
@@ -85,9 +129,24 @@ class Master extends Component {
         <Route path="/dashboard" render={() => <Dashboard />} />
         <Route
           path="/addworkouts"
-          render={() => <AddWorkouts handleChange={this.handleChange} />}
+          render={() => (
+            <AddWorkouts
+              handleChangeRoutine={this.handleChangeRoutine}
+              //   handleSubmit={this.handleSubmit}
+              test={this.test}
+            />
+          )}
         />
-        <Route path="/addexercises" render={() => <AddExercises />} />
+        <Route
+          path="/addexercises"
+          render={() => (
+            <AddExercises
+              handleChangeExercise={this.handleChangeExercise}
+              handleChangeWorkoutTitle={this.handleChangeWorkoutTitle}
+            />
+          )}
+        />
+
         <Route path="/workouts" render={() => <Workouts />} />
         <Route path="/exercises" render={() => <Exercises />} />
         <Route path="/notes" render={() => <Notes />} />
@@ -104,4 +163,4 @@ class Master extends Component {
 
 // if logged in show Dash
 
-export default Master;
+export default withRouter(Master);
