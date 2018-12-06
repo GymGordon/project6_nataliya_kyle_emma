@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 class AddExercises extends Component {
   render() {
     return (
-      <div>
-        <h1>Add Exercises</h1>
+      <section className="addExercises">
+        <h2>Add Exercises</h2>
         <form>
-          <label htmlFor="workoutTitle">Workout Title</label>
+          <label htmlFor="workoutTitle" className="visuallyhidden">Workout Title</label>
           <input
             onChange={this.props.handleChangeWorkoutTitle}
             type="text"
@@ -15,12 +15,11 @@ class AddExercises extends Component {
             placeholder="Workout Title"
           />
 
-          <label htmlFor="exerciseName">Exercise Name</label>
+          <label htmlFor="exerciseName">Exercise</label>
           <input
             onChange={this.props.handleChangeExercise}
             type="text"
             id="exerciseName"
-            placeholder="Exercise Name"
           />
 
           <label htmlFor="exerciseSets">Sets</label>
@@ -28,7 +27,6 @@ class AddExercises extends Component {
             onChange={this.props.handleChangeExercise}
             type="text"
             id="exerciseSets"
-            placeholder="# Sets"
           />
 
           <label htmlFor="exerciseReps">Reps</label>
@@ -36,12 +34,11 @@ class AddExercises extends Component {
             onChange={this.props.handleChangeExercise}
             type="text"
             id="exerciseReps"
-            placeholder="# Reps"
           />
 
-          <input type="submit" value="Add Workout" />
+          <input type="submit" value="Add Exercise" />
         </form>
-      </div>
+      </section>
     );
   }
 }

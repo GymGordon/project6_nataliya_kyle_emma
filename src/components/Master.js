@@ -81,11 +81,9 @@ class Master extends Component {
         routines: {
             ...this.state.routines,
             [this.routineName]: {}
-            
         }
-    }, () => {
-        this.routineName = ""
     });
+      this.props.history.push("/addexercises");
   };
 
   //   handleChangeRoutine = e => {

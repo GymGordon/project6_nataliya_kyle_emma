@@ -5,11 +5,10 @@ import firebase from "./firebase";
 class AddWorkouts extends Component {
   render() {
     return (
-      <div>
-        <h1>Workouts</h1>
-            <form action="" onSubmit={this.props.test}>
-
-        {/* <form action="" onSubmit={this.props.handleSubmit}> */}
+      <section className="addWorkouts">
+        <h2>Workouts</h2>
+        <form action="" onSubmit={this.props.test}>
+          {/* <form action="" onSubmit={this.props.handleSubmit}> */}
           <label htmlFor="routineName">Routine Name</label>
           <input
             onChange={this.props.handleChangeRoutine}
@@ -19,7 +18,7 @@ class AddWorkouts extends Component {
           />
           <input type="submit" value="Add Workout" />
         </form>
-      </div>
+      </section>
     );
   }
 }

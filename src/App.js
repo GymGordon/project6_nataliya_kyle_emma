@@ -26,13 +26,16 @@ class App extends Component {
     // router
     // render master
 
-    return (
-      <Router>
+    return <Router>
         <div className="App">
-          <Master history={this.props.history} />
+          <header>
+            <h1>Gym Gordon</h1>
+          </header>
+            <div className="wrapper">
+              <Master history={this.props.history} />
+            </div>
         </div>
-      </Router>
-    );
+      </Router>;
   }
 }
 
