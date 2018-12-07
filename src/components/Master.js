@@ -186,6 +186,12 @@ class Master extends Component {
     // "DONE with creating the workout."
     // Re-direct back to user's routine/workout list.
     this.props.history.push(`/workouts/${routineKey}/${workoutKey}`);
+
+    this.setState({
+      exerciseCounter: 1,
+      exerciseCollection: []
+    });
+    
   };
 
   render() {
@@ -209,6 +215,7 @@ class Master extends Component {
               workoutCounter={this.state.workoutCounter}
               routineName={this.state.routineName}
               workoutName={this.state.workoutName}
+              workoutCollection={this.state.workoutCollection}
             />
           )}
         />
