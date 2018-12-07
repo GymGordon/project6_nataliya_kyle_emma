@@ -23,7 +23,8 @@ class Master extends Component {
     super();
     this.state = {
       user: null,
-      exerciseCounter: 1
+      exerciseCounter: 1,
+      exerciseCollection: []
     };
   }
 
@@ -83,24 +84,37 @@ class Master extends Component {
       .ref(`/${this.state.user.uid}/${routineKey}`)
       .push(newWorkout).key;
 
+    // we need to push an EXERCISES OBJECT with multiple "new exercises"
+    // map over our exercices object and send individual exercise objects to FB
     const newExercise = {
       exerciseName: this.state.exerciseName,
       exerciseSets: this.state.exerciseSets,
       exerciseReps: this.state.exerciseReps
     };
+
     firebase
       .database()
       .ref(`/${this.state.user.uid}/${routineKey}/${workoutKey}`)
       .push(newExercise);
   };
 
-  
-
   addExercise = e => {
     // add additional exercise form to page + saving to state
     e.preventDefault();
+
+    const newExercise = {
+      exerciseName: this.state.exerciseName,
+      exerciseSets: this.state.exerciseSets,
+      exerciseReps: this.state.exerciseReps
+    };
+
+    const updatedExerciseCollection = Array.from(this.state.exerciseCollection);
+
+    updatedExerciseCollection.push(newExercise);
+
     this.setState({
-      exerciseCounter: this.state.exerciseCounter + 1
+      exerciseCounter: this.state.exerciseCounter + 1,
+      exerciseCollection: updatedExerciseCollection
     });
   };
 
