@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import firebase from "./firebase";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
-import AddWorkouts from "./AddWorkouts";
 import AddExercises from "./AddExercises";
 import Workouts from "./Workouts";
 import Exercises from "./Exercises";
@@ -26,7 +25,8 @@ class Master extends Component {
       routineCounter: 1,
       exerciseCounter: 1,
       workoutCounter: 1,
-      exerciseCollection: []
+      exerciseCollection: [],
+      workoutCollection: []
     };
   }
 
@@ -91,7 +91,7 @@ class Master extends Component {
     });
 
     // Re-direct
-    this.props.history.push(`/addworkouts/${routineKey}`);
+    this.props.history.push(`/workouts/${routineKey}`);
   };
 
   // ADD WORKOUT
@@ -106,6 +106,10 @@ class Master extends Component {
     const newWorkout = {
       workoutName: this.state.workoutName
     };
+    // create a copy of the workoutCollection array
+    const updatedWorkoutCollection = Array.from(this.state.workoutCollection);
+    // push new workout to the updatedworkout array
+    updatedWorkoutCollection.push(newWorkout);
 
     // WORKOUT KEY + PUSH TO FB (uid/routine/workout)
     const workoutKey = firebase
@@ -114,8 +118,10 @@ class Master extends Component {
       .push(newWorkout).key;
 
     // counter appends workout form (Monday) to page
+    // set the state of the workoutCollection to the updated workoutCollection array
     this.setState({
-      workoutCounter: this.state.workoutCounter + 1
+      workoutCounter: this.state.workoutCounter + 1,
+      workoutCollection: updatedWorkoutCollection
     });
 
     // re-direct
@@ -177,7 +183,9 @@ class Master extends Component {
       .ref(`/${this.state.user.uid}/${routineKey}/${workoutKey}`)
       .push(newExercise);
 
-    // this.props.history.push(`/addworkouts`);
+    // "DONE with creating the workout."
+    // Re-direct back to user's routine/workout list.
+    this.props.history.push(`/workouts/${routineKey}/${workoutKey}`);
   };
 
   render() {
@@ -193,33 +201,35 @@ class Master extends Component {
           )}
         />
         <Route
-          path="/addworkouts/:routineKey"
+          path="/workouts/:routineKey"
           render={() => (
-            <AddWorkouts
+            <Workouts
               handleChange={this.handleChange}
               addWorkout={this.addWorkout}
               workoutCounter={this.state.workoutCounter}
               routineName={this.state.routineName}
+              workoutName={this.state.workoutName}
             />
           )}
         />
         <Route
           path="/addexercises/:routineKey/:workoutKey"
-          render={() => (
-            <AddExercises
-              handleChange={this.handleChange}
-              saveWorkout={this.saveWorkout}
-              addExercise={this.addExercise}
-              exerciseCounter={this.state.exerciseCounter}
-              exerciseName={this.exerciseName}
-              exerciseSets={this.exerciseSets}
-              exerciseReps={this.exerciseReps}
-              workoutName={this.state.workoutName}
-            />
-          )}
+          render={
+            () => (
+              <AddExercises
+                handleChange={this.handleChange}
+                saveWorkout={this.saveWorkout}
+                addExercise={this.addExercise}
+                exerciseCounter={this.state.exerciseCounter}
+                workoutName={this.state.workoutName}
+              />
+            )
+            // exerciseName={this.exerciseName}
+            // exerciseSets={this.exerciseSets}
+            // exerciseReps={this.exerciseReps}
+          }
         />
 
-        <Route path="/workouts" render={() => <Workouts />} />
         <Route path="/exercises" render={() => <Exercises />} />
         <Route path="/notes" render={() => <Notes />} />
         <Route path="/logs" render={() => <Logs />} />

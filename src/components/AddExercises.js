@@ -12,9 +12,9 @@ class AddExercises extends Component {
     for (let i = 0; i < this.props.exerciseCounter; i++) {
       exerciseForms.push(
         <ExerciseForm
-          exerciseName={this.props.exerciseName}
-          exerciseSets={this.props.exerciseSets}
-          exerciseReps={this.props.exerciseReps}
+          // exerciseName={this.props.exerciseName}
+          // exerciseSets={this.props.exerciseSets}
+          // exerciseReps={this.props.exerciseReps}
           handleChange={this.props.handleChange}
         />
       );
@@ -23,15 +23,6 @@ class AddExercises extends Component {
     return <section className="addExercises">
         <h2>{this.props.workoutName}</h2>
         <form onSubmit={this.props.saveWorkout} data-routineKey={this.props.match.params.routineKey} data-workoutKey={this.props.match.params.workoutKey}>
-          {/* <label htmlFor="workoutTitle">Workout Title</label>
-          <input
-            required
-            onChange={this.props.handleChange}
-            type="text"
-            id="workoutTitle"
-            placeholder="i.e. Leg Day, Monday"
-          /> */}
-
           <div className="exerciseLabels clearfix">
             <label htmlFor="exerciseName">Exercise</label>
             <label htmlFor="exerciseSets">Sets</label>
