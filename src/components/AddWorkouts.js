@@ -7,11 +7,10 @@ class AddWorkouts extends Component {
     return (
       <section className="addWorkouts">
         <h2>Workouts</h2>
-        <form action="" onSubmit={this.props.test}>
-          {/* <form action="" onSubmit={this.props.handleSubmit}> */}
+        <form action="" onSubmit={this.props.addRoutine}>
           <label htmlFor="routineName">Routine Name</label>
           <input
-            onChange={this.props.handleChangeRoutine}
+            onChange={this.props.handleChange}
             type="text"
             name="routineName"
             id="routineName"

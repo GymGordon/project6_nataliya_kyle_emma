@@ -23,14 +23,8 @@ class Master extends Component {
     super();
     this.state = {
       user: null,
-      routines: {}
-    //   routine: {
-    //     routineName: "",
-    //     workout: {
-    //       workoutTitle: "",
-    //       exercises: {}
-    //     }
-    //   }
+      exerciseCounter: 1,
+      exerciseCollection: []
     };
   }
 
@@ -46,7 +40,6 @@ class Master extends Component {
             this.dbRef = firebase.database().ref(`/${this.state.user.uid}`);
           }
         );
-        // redirect to Dash
       }
     });
   }
@@ -68,58 +61,84 @@ class Master extends Component {
     });
   };
 
-  handleSubmit = e => {
+  addRoutine = e => {
     e.preventDefault();
-    this.props.history.push("/addexercises");
+    const newRoutine = {
+      routineName: this.state.routineName
+    };
+    //pushing the routine object under the uid
+    const routineKey = this.dbRef.push(newRoutine).key;
+    //redirecting the user to go to Add Exercises page
+    this.props.history.push(`/addexercises/${routineKey}`);
   };
 
-  test = e => {
+  saveWorkout = e => {
+    // pushing workout to unique key
     e.preventDefault();
-    this.routineName = e.target.children[1].value;
+    const routineKey = e.target.id;
+    const newWorkout = {
+      workoutTitle: this.state.workoutTitle
+    };
+    const workoutKey = firebase
+      .database()
+      .ref(`/${this.state.user.uid}/${routineKey}`)
+      .push(newWorkout).key;
+
+    // we need to push an EXERCISES OBJECT with multiple "new exercises"
+    // map over our exercices object and send individual exercise objects to FB
+    
+  
+    this.state.exerciseCollection.map((exercise) => {
+      console.log(exercise);
+      firebase
+        .database()
+        .ref(`/${this.state.user.uid}/${routineKey}/${workoutKey}`)
+        .push(exercise);
+    })
+
+    const newExercise = {
+      exerciseName: this.state.exerciseName,
+      exerciseSets: this.state.exerciseSets,
+      exerciseReps: this.state.exerciseReps
+    };
+
+    firebase
+      .database()
+      .ref(`/${this.state.user.uid}/${routineKey}/${workoutKey}`)
+      .push(newExercise);
+
+    // updatedExerciseCollection = Array.from(this.state.exerciseCollection);
+
+    // updatedExerciseCollection.push(newExercise)
+
+  };
+
+  addExercise = e => {
+    // add additional exercise form to page + saving to state
+    e.preventDefault();
+
+    const newExercise = {
+      exerciseName: this.state.exerciseName,
+      exerciseSets: this.state.exerciseSets,
+      exerciseReps: this.state.exerciseReps
+    };
+
+    const updatedExerciseCollection = Array.from(this.state.exerciseCollection);
+
+    updatedExerciseCollection.push(newExercise);
 
     this.setState({
-        routines: {
-            ...this.state.routines,
-            [this.routineName]: {}
-        }
+      exerciseCounter: this.state.exerciseCounter + 1,
+      exerciseCollection: updatedExerciseCollection
     });
-      this.props.history.push("/addexercises");
   };
 
-  //   handleChangeRoutine = e => {
-  //     this.setState({
-  //       routine: {
-  //         ...this.state.routine,
-  //         [e.target.id]: e.target.value
-  //       }
-  //     });
-  //   };
-
-  //   handleChangeWorkoutTitle = e => {
-  //     this.setState({
-  //       routine: {
-  //         ...this.state.routine,
-  //         workout: {
-  //           [e.target.id]: e.target.value
-  //         }
-  //       }
-  //     });
-  //   };
-
-  //   handleChangeExercise = e => {
-  //     this.setState({
-  //       routine: {
-  //         ...this.state.routine,
-  //         workout: {
-  //           ...this.state.routine.workout,
-  //           exercises: {
-  //             ...this.state.routine.workout.exercises,
-  //             [e.target.id]: e.target.value
-  //           }
-  //         }
-  //       }
-  //     });
-  //   };
+  handleChange = e => {
+    this.setState({
+      ...this.state,
+      [e.target.id]: e.target.value
+    });
+  };
 
   render() {
     return (
@@ -129,18 +148,22 @@ class Master extends Component {
           path="/addworkouts"
           render={() => (
             <AddWorkouts
-              handleChangeRoutine={this.handleChangeRoutine}
-              //   handleSubmit={this.handleSubmit}
-              test={this.test}
+              handleChange={this.handleChange}
+              addRoutine={this.addRoutine}
             />
           )}
         />
         <Route
-          path="/addexercises"
+          path="/addexercises/:routineKey"
           render={() => (
             <AddExercises
-              handleChangeExercise={this.handleChangeExercise}
-              handleChangeWorkoutTitle={this.handleChangeWorkoutTitle}
+              handleChange={this.handleChange}
+              saveWorkout={this.saveWorkout}
+              addExercise={this.addExercise}
+              exerciseCounter={this.state.exerciseCounter}
+              exerciseName={this.exerciseName}
+              exerciseSets={this.exerciseSets}
+              exerciseReps={this.exerciseReps}
             />
           )}
         />

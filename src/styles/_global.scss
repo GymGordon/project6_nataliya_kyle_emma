@@ -53,10 +53,16 @@ label {
 input {
   padding: 2px 5px;
   text-align: center;
+  border: 1px solid black;
+  // width: 100%;
 }
 
 input[type="submit"] {
   display: block;
   margin: 10px auto;
+}
+
+.exerciseInputs {
+  float: left;
 }
 
