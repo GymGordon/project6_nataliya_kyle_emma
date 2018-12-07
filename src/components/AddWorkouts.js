@@ -6,7 +6,7 @@ class AddWorkouts extends Component {
   render() {
     return (
       <section className="addWorkouts">
-        <h2>Workouts</h2>
+        <h2>Your Routine</h2>
         <form action="" onSubmit={this.props.addRoutine}>
           <label htmlFor="routineName">Routine Name</label>
           <input
@@ -14,8 +14,9 @@ class AddWorkouts extends Component {
             type="text"
             name="routineName"
             id="routineName"
+            placeholder="i.e. Leg Day, Monday"
           />
-          <input type="submit" value="Add Workout" />
+          <input type="submit" value="Add A Workout" />
         </form>
       </section>
     );
