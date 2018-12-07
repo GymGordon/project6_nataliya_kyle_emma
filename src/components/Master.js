@@ -72,20 +72,31 @@ class Master extends Component {
   };
 
   saveWorkout = e => {
-    // writing to firebase: the exercises (name, rep, set) + workout title
+    // pushing workout to unique key
     e.preventDefault();
     const routineKey = e.target.id;
-    // setting the workout title to the input value
     const newWorkout = {
       workoutTitle: this.state.workoutTitle
     };
-    firebase
+    const workoutKey = firebase
       .database()
       .ref(`/${this.state.user.uid}/${routineKey}`)
-      .push(newWorkout);
+      .push(newWorkout).key;
+
+    const newExercise = {
+      exerciseName: this.state.exerciseName,
+      exerciseSets: this.state.exerciseSets,
+      exerciseReps: this.state.exerciseReps
+    };
+    firebase
+      .database()
+      .ref(`/${this.state.user.uid}/${routineKey}/${workoutKey}`)
+      .push(newExercise);
   };
 
-  addExercise = (e) => {
+  
+
+  addExercise = e => {
     // add additional exercise form to page + saving to state
     e.preventDefault();
     this.setState({
@@ -121,6 +132,9 @@ class Master extends Component {
               saveWorkout={this.saveWorkout}
               addExercise={this.addExercise}
               exerciseCounter={this.state.exerciseCounter}
+              exerciseName={this.exerciseName}
+              exerciseSets={this.exerciseSets}
+              exerciseReps={this.exerciseReps}
             />
           )}
         />

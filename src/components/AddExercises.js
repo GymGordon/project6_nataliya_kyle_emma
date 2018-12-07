@@ -8,10 +8,15 @@ class AddExercises extends Component {
     super(props);
   }
   render() {
-
-    const exerciseForms =[]
+    const exerciseForms = [];
     for (let i = 0; i < this.props.exerciseCounter; i++) {
-      exerciseForms.push(<ExerciseForm />)
+      exerciseForms.push
+      (<ExerciseForm 
+          exerciseName={this.props.exerciseName}
+          exerciseSets={this.props.exerciseSets}
+          exerciseReps={this.props.exerciseReps}
+          handleChange={this.props.handleChange}
+      />);
     }
 
     return (
@@ -34,7 +39,7 @@ class AddExercises extends Component {
           <label htmlFor="exerciseReps">Reps</label>
 
           {exerciseForms}
-        
+
           <button onClick={this.props.addExercise}>Add Exercise</button>
 
           <input type="submit" value="Save Workout" />

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
 class ExerciseForm extends Component {
+    constructor(props){
+        super(props);
+    }
   render() {
     return (
       <fieldset className="clearfix">
@@ -33,4 +36,3 @@ class ExerciseForm extends Component {
 }
 
 export default ExerciseForm;
-
