@@ -1,20 +1,31 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import firebase from "./firebase";
 
 class AddWorkouts extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <section className="addWorkouts">
-        <h2>Your Routine</h2>
-        <form action="" onSubmit={this.props.addRoutine}>
-          <label htmlFor="routineName">Routine Name</label>
+        <h2>{this.props.routineName}</h2>
+        <form
+          action=""
+          onSubmit={this.props.addWorkout}
+          // id={this.props.match.params.routineKey}
+          data-routineKey={this.props.match.params.routineKey}
+        >
+          <label className="visuallyhidden" htmlFor="workoutName">
+            Workout Name
+          </label>
           <input
+            required
             onChange={this.props.handleChange}
             type="text"
-            name="routineName"
-            id="routineName"
-            placeholder="i.e. Leg Day, Monday"
+            name="workoutName"
+            id="workoutName"
+            placeholder="Workout Name"
           />
           <input type="submit" value="Add A Workout" />
         </form>
@@ -23,4 +34,4 @@ class AddWorkouts extends Component {
   }
 }
 
-export default AddWorkouts;
+export default withRouter(AddWorkouts);

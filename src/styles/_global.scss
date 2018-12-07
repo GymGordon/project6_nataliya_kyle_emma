@@ -62,7 +62,19 @@ input[type="submit"] {
   margin: 10px auto;
 }
 
+fieldset {
+  border: none;
+  margin-bottom:25px;
+}
 .exerciseInputs {
+  width: 33.33%;
   float: left;
 }
 
+.exerciseLabels {
+  
+  label {
+    float: left;
+    width: 33.33%;
+  }
+}
