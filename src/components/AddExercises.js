@@ -10,33 +10,24 @@ class AddExercises extends Component {
   render() {
     const exerciseForms = [];
     for (let i = 0; i < this.props.exerciseCounter; i++) {
-      exerciseForms.push
-      (<ExerciseForm 
-          exerciseName={this.props.exerciseName}
-          exerciseSets={this.props.exerciseSets}
-          exerciseReps={this.props.exerciseReps}
+      exerciseForms.push(
+        <ExerciseForm
+          // exerciseName={this.props.exerciseName}
+          // exerciseSets={this.props.exerciseSets}
+          // exerciseReps={this.props.exerciseReps}
           handleChange={this.props.handleChange}
-      />);
+        />
+      );
     }
 
-    return (
-      <section className="addExercises">
-        <h2>Add Exercises</h2>
-        <form
-          onSubmit={this.props.saveWorkout}
-          id={this.props.match.params.routineKey}
-        >
-          <label htmlFor="workoutTitle">Workout Title</label>
-          <input
-            onChange={this.props.handleChange}
-            type="text"
-            id="workoutTitle"
-            placeholder="Workout Title"
-          />
-
-          <label htmlFor="exerciseName">Exercise</label>
-          <label htmlFor="exerciseSets">Sets</label>
-          <label htmlFor="exerciseReps">Reps</label>
+    return <section className="addExercises">
+        <h2>{this.props.workoutName}</h2>
+        <form onSubmit={this.props.saveWorkout} data-routineKey={this.props.match.params.routineKey} data-workoutKey={this.props.match.params.workoutKey}>
+          <div className="exerciseLabels clearfix">
+            <label htmlFor="exerciseName">Exercise</label>
+            <label htmlFor="exerciseSets">Sets</label>
+            <label htmlFor="exerciseReps">Reps</label>
+          </div>
 
           {exerciseForms}
 
@@ -44,8 +35,7 @@ class AddExercises extends Component {
 
           <input type="submit" value="Save Workout" />
         </form>
-      </section>
-    );
+      </section>;
   }
 }
 

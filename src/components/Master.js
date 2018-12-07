@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import firebase from "./firebase";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
-import AddWorkouts from "./AddWorkouts";
 import AddExercises from "./AddExercises";
 import Workouts from "./Workouts";
 import Exercises from "./Exercises";
@@ -23,8 +22,12 @@ class Master extends Component {
     super();
     this.state = {
       user: null,
+      routineCounter: 1,
       exerciseCounter: 1,
-      exerciseCollection: []
+      workoutCounter: 1,
+      exerciseCollection: [],
+      workoutCollection: [],
+      workoutKeysCollection: []
     };
   }
 
@@ -44,6 +47,8 @@ class Master extends Component {
     });
   }
 
+  // LOGIN FUNCTIONS
+
   logIn = () => {
     auth.signInWithPopup(provider).then(result => {
       this.setState({
@@ -61,40 +66,113 @@ class Master extends Component {
     });
   };
 
+  // CONTROLLED INPUTS
+
+  handleChange = e => {
+    this.setState({
+      ...this.state,
+      [e.target.id]: e.target.value
+    });
+  };
+
+  // ADD ROUTINE
+
   addRoutine = e => {
     e.preventDefault();
+    // new routine object (Cutting Season)
     const newRoutine = {
       routineName: this.state.routineName
     };
-    //pushing the routine object under the uid
+
+    // ROUTINE KEY + PUSH TO FB (uid/routine/)
     const routineKey = this.dbRef.push(newRoutine).key;
-    //redirecting the user to go to Add Exercises page
-    this.props.history.push(`/addexercises/${routineKey}`);
+
+    this.setState({
+      routineCounter: this.state.routineCounter + 1
+    });
+
+    // Re-direct
+    this.props.history.push(`/workouts/${routineKey}`);
   };
+
+  // ADD WORKOUT
+
+  addWorkout = e => {
+    e.preventDefault();
+
+    // ROUTINE KEY (from add workout form)
+    const routineKey = e.target.dataset.routinekey;
+
+    // new workout object (Monday)
+    const newWorkout = {
+      workoutName: this.state.workoutName
+    };
+    // create a copy of the workoutCollection array
+    const updatedWorkoutCollection = Array.from(this.state.workoutCollection);
+    // push new workout to the updatedworkout array
+    updatedWorkoutCollection.push(newWorkout);
+
+    // WORKOUT KEY + PUSH TO FB (uid/routine/workout)
+    const workoutKey = firebase
+      .database() 
+      .ref(`/${this.state.user.uid}/${routineKey}`)
+      .push(newWorkout).key;
+
+    // counter appends workout form (Monday) to page
+    // set the state of the workoutCollection to the updated workoutCollection array
+    this.setState({
+      workoutCounter: this.state.workoutCounter + 1,
+      workoutCollection: updatedWorkoutCollection,
+      
+    });
+
+    // re-direct
+    this.props.history.push(`/addexercises/${routineKey}/${workoutKey}`);
+  };
+
+  // ADD EXERCISE
+
+  addExercise = e => {
+    e.preventDefault();
+
+    const newExercise = {
+      exerciseName: this.state.exerciseName,
+      exerciseSets: this.state.exerciseSets,
+      exerciseReps: this.state.exerciseReps
+    };
+
+    // copy of exercise array
+    const updatedExerciseCollection = Array.from(this.state.exerciseCollection);
+
+    // push new exercise object to copy of exercise array
+    updatedExerciseCollection.push(newExercise);
+
+    // set exercise array copy to state
+    // counter appends exercise form (bicep curls) to page
+    this.setState({
+      exerciseCounter: this.state.exerciseCounter + 1,
+      exerciseCollection: updatedExerciseCollection
+    });
+  };
+
+  // SAVE WORKOUT
 
   saveWorkout = e => {
     // pushing workout to unique key
     e.preventDefault();
-    const routineKey = e.target.id;
-    const newWorkout = {
-      workoutTitle: this.state.workoutTitle
-    };
-    const workoutKey = firebase
-      .database()
-      .ref(`/${this.state.user.uid}/${routineKey}`)
-      .push(newWorkout).key;
+    const routineKey = e.target.dataset.routinekey;
+    const workoutKey = e.target.dataset.workoutkey;
 
     // we need to push an EXERCISES OBJECT with multiple "new exercises"
     // map over our exercices object and send individual exercise objects to FB
-    
-  
-    this.state.exerciseCollection.map((exercise) => {
+
+    this.state.exerciseCollection.map(exercise => {
       console.log(exercise);
       firebase
         .database()
         .ref(`/${this.state.user.uid}/${routineKey}/${workoutKey}`)
         .push(exercise);
-    })
+    });
 
     const newExercise = {
       exerciseName: this.state.exerciseName,
@@ -107,68 +185,61 @@ class Master extends Component {
       .ref(`/${this.state.user.uid}/${routineKey}/${workoutKey}`)
       .push(newExercise);
 
-    // updatedExerciseCollection = Array.from(this.state.exerciseCollection);
-
-    // updatedExerciseCollection.push(newExercise)
-
-  };
-
-  addExercise = e => {
-    // add additional exercise form to page + saving to state
-    e.preventDefault();
-
-    const newExercise = {
-      exerciseName: this.state.exerciseName,
-      exerciseSets: this.state.exerciseSets,
-      exerciseReps: this.state.exerciseReps
-    };
-
-    const updatedExerciseCollection = Array.from(this.state.exerciseCollection);
-
-    updatedExerciseCollection.push(newExercise);
+    // "DONE with creating the workout."
+    // Re-direct back to user's routine/workout list.
+    this.props.history.push(`/workouts/${routineKey}/${workoutKey}`);
 
     this.setState({
-      exerciseCounter: this.state.exerciseCounter + 1,
-      exerciseCollection: updatedExerciseCollection
+      exerciseCounter: 1,
+      exerciseCollection: []
     });
-  };
-
-  handleChange = e => {
-    this.setState({
-      ...this.state,
-      [e.target.id]: e.target.value
-    });
+    
   };
 
   render() {
     return (
       <div>
-        <Route path="/dashboard" render={() => <Dashboard />} />
         <Route
-          path="/addworkouts"
+          path="/dashboard"
           render={() => (
-            <AddWorkouts
-              handleChange={this.handleChange}
+            <Dashboard
               addRoutine={this.addRoutine}
+              handleChange={this.handleChange}
             />
           )}
         />
         <Route
-          path="/addexercises/:routineKey"
+          path="/workouts/:routineKey"
           render={() => (
-            <AddExercises
+            <Workouts
               handleChange={this.handleChange}
-              saveWorkout={this.saveWorkout}
-              addExercise={this.addExercise}
-              exerciseCounter={this.state.exerciseCounter}
-              exerciseName={this.exerciseName}
-              exerciseSets={this.exerciseSets}
-              exerciseReps={this.exerciseReps}
+              addWorkout={this.addWorkout}
+              workoutCounter={this.state.workoutCounter}
+              routineName={this.state.routineName}
+              workoutName={this.state.workoutName}
+              workoutCollection={this.state.workoutCollection}
+              workoutKey={this.state.workoutKey}
             />
           )}
+        />
+        <Route
+          path="/addexercises/:routineKey/:workoutKey"
+          render={
+            () => (
+              <AddExercises
+                handleChange={this.handleChange}
+                saveWorkout={this.saveWorkout}
+                addExercise={this.addExercise}
+                exerciseCounter={this.state.exerciseCounter}
+                workoutName={this.state.workoutName}
+              />
+            )
+            // exerciseName={this.exerciseName}
+            // exerciseSets={this.exerciseSets}
+            // exerciseReps={this.exerciseReps}
+          }
         />
 
-        <Route path="/workouts" render={() => <Workouts />} />
         <Route path="/exercises" render={() => <Exercises />} />
         <Route path="/notes" render={() => <Notes />} />
         <Route path="/logs" render={() => <Logs />} />
@@ -181,7 +252,5 @@ class Master extends Component {
     );
   }
 }
-
-// if logged in show Dash
 
 export default withRouter(Master);

@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 
 class ExerciseForm extends Component {
-    constructor(props){
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <fieldset className="clearfix">
         <div className="exerciseInputs">
           <input
+            required
             onChange={this.props.handleChange}
             type="text"
             id="exerciseName"
@@ -17,6 +18,7 @@ class ExerciseForm extends Component {
 
         <div className="exerciseInputs">
           <input
+            required
             onChange={this.props.handleChange}
             type="text"
             id="exerciseSets"
@@ -25,6 +27,7 @@ class ExerciseForm extends Component {
 
         <div className="exerciseInputs">
           <input
+            required
             onChange={this.props.handleChange}
             type="text"
             id="exerciseReps"
