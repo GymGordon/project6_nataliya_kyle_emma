@@ -30,11 +30,13 @@ class Workouts extends Component {
           />
           <input type="submit" value="Add A Workout" />
         </form>
+
         {this.props.workoutCollection.map((workout) => {
           return (
-            <WorkoutItem workoutName={workout.workoutName} />
+            <WorkoutItem workoutName={workout.workoutName} workoutKey={this.props.workoutKey}  />
           )
         })}
+
       </section>
     );
   }

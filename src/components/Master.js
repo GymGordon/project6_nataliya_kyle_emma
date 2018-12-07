@@ -26,7 +26,8 @@ class Master extends Component {
       exerciseCounter: 1,
       workoutCounter: 1,
       exerciseCollection: [],
-      workoutCollection: []
+      workoutCollection: [],
+      workoutKeysCollection: []
     };
   }
 
@@ -113,7 +114,7 @@ class Master extends Component {
 
     // WORKOUT KEY + PUSH TO FB (uid/routine/workout)
     const workoutKey = firebase
-      .database()
+      .database() 
       .ref(`/${this.state.user.uid}/${routineKey}`)
       .push(newWorkout).key;
 
@@ -121,7 +122,8 @@ class Master extends Component {
     // set the state of the workoutCollection to the updated workoutCollection array
     this.setState({
       workoutCounter: this.state.workoutCounter + 1,
-      workoutCollection: updatedWorkoutCollection
+      workoutCollection: updatedWorkoutCollection,
+      
     });
 
     // re-direct
@@ -216,6 +218,7 @@ class Master extends Component {
               routineName={this.state.routineName}
               workoutName={this.state.workoutName}
               workoutCollection={this.state.workoutCollection}
+              workoutKey={this.state.workoutKey}
             />
           )}
         />

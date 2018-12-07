@@ -8,7 +8,7 @@ class WorkoutItem extends Component {
         }
     }
     render() {
-        return <button>{this.props.workoutName}</button>;
+        return <button key={this.props.workoutKey}>{this.props.workoutName}</button>;
     }
 }
 
