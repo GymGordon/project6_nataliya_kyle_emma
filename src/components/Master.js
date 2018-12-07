@@ -86,6 +86,16 @@ class Master extends Component {
 
     // we need to push an EXERCISES OBJECT with multiple "new exercises"
     // map over our exercices object and send individual exercise objects to FB
+    
+  
+    this.state.exerciseCollection.map((exercise) => {
+      console.log(exercise);
+      firebase
+        .database()
+        .ref(`/${this.state.user.uid}/${routineKey}/${workoutKey}`)
+        .push(exercise);
+    })
+
     const newExercise = {
       exerciseName: this.state.exerciseName,
       exerciseSets: this.state.exerciseSets,
@@ -96,6 +106,11 @@ class Master extends Component {
       .database()
       .ref(`/${this.state.user.uid}/${routineKey}/${workoutKey}`)
       .push(newExercise);
+
+    // updatedExerciseCollection = Array.from(this.state.exerciseCollection);
+
+    // updatedExerciseCollection.push(newExercise)
+
   };
 
   addExercise = e => {
