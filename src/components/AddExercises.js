@@ -20,9 +20,10 @@ class AddExercises extends Component {
       );
     }
 
-    return <section className="addExercises">
+    return (
+      <section className="addExercises">
         <h2>{this.props.workoutName}</h2>
-        <form onSubmit={this.props.saveWorkout} data-routineKey={this.props.match.params.routineKey} data-workoutKey={this.props.match.params.workoutKey}>
+        <form onSubmit={this.props.saveWorkout}>
           <div className="exerciseLabels clearfix">
             <label htmlFor="exerciseName">Exercise</label>
             <label htmlFor="exerciseSets">Sets</label>
@@ -35,7 +36,8 @@ class AddExercises extends Component {
 
           <input type="submit" value="Save Workout" />
         </form>
-      </section>;
+      </section>
+    );
   }
 }
 

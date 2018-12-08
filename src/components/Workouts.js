@@ -11,12 +11,7 @@ class Workouts extends Component {
     return (
       <section className="Workouts">
         <h2>{this.props.routineName}</h2>
-        <form
-          action=""
-          onSubmit={this.props.addWorkout}
-          // id={this.props.match.params.routineKey}
-          data-routineKey={this.props.match.params.routineKey}
-        >
+        <form action="" onSubmit={this.props.addWorkout}>
           <label className="visuallyhidden" htmlFor="workoutName">
             Workout Name
           </label>
@@ -31,12 +26,13 @@ class Workouts extends Component {
           <input type="submit" value="Add A Workout" />
         </form>
 
-        {this.props.workoutCollection.map((workout) => {
-          return (
-            <WorkoutItem workoutName={workout.workoutName} workoutKey={this.props.workoutKey}  />
-          )
+        {this.props.workoutKeys.map(workout => {
+          console.log(workout);
+          return Object.entries(workout).map(x => {
+            console.log(x);
+            return <WorkoutItem workoutName={x[0]} key={x[1]} />;
+          });
         })}
-
       </section>
     );
   }

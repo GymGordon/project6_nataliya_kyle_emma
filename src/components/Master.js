@@ -27,7 +27,8 @@ class Master extends Component {
       workoutCounter: 1,
       exerciseCollection: [],
       workoutCollection: [],
-      workoutKeysCollection: []
+      workoutKeys: [],
+      exerciseKeys: []
     };
   }
 
@@ -88,11 +89,12 @@ class Master extends Component {
     const routineKey = this.dbRef.push(newRoutine).key;
 
     this.setState({
-      routineCounter: this.state.routineCounter + 1
+      routineCounter: this.state.routineCounter + 1,
+      routineKey: routineKey
     });
 
     // Re-direct
-    this.props.history.push(`/workouts/${routineKey}`);
+    this.props.history.push(`/workouts/`);
   };
 
   // ADD WORKOUT
@@ -101,7 +103,6 @@ class Master extends Component {
     e.preventDefault();
 
     // ROUTINE KEY (from add workout form)
-    const routineKey = e.target.dataset.routinekey;
 
     // new workout object (Monday)
     const newWorkout = {
@@ -114,20 +115,29 @@ class Master extends Component {
 
     // WORKOUT KEY + PUSH TO FB (uid/routine/workout)
     const workoutKey = firebase
-      .database() 
-      .ref(`/${this.state.user.uid}/${routineKey}`)
+      .database()
+      .ref(`/${this.state.user.uid}/${this.state.routineKey}`)
       .push(newWorkout).key;
 
+      const updatedWorkoutKeys = Array.from(this.state.workoutKeys)
+      updatedWorkoutKeys.push({
+        [this.state.workoutName]: workoutKey
+      })
+
+    
     // counter appends workout form (Monday) to page
     // set the state of the workoutCollection to the updated workoutCollection array
     this.setState({
       workoutCounter: this.state.workoutCounter + 1,
       workoutCollection: updatedWorkoutCollection,
-      
+      workoutKey: workoutKey,
+      workoutKeys: updatedWorkoutKeys
     });
 
+
+
     // re-direct
-    this.props.history.push(`/addexercises/${routineKey}/${workoutKey}`);
+    this.props.history.push(`/addexercises/`);
   };
 
   // ADD EXERCISE
@@ -158,20 +168,24 @@ class Master extends Component {
   // SAVE WORKOUT
 
   saveWorkout = e => {
-    // pushing workout to unique key
     e.preventDefault();
-    const routineKey = e.target.dataset.routinekey;
-    const workoutKey = e.target.dataset.workoutkey;
 
-    // we need to push an EXERCISES OBJECT with multiple "new exercises"
-    // map over our exercices object and send individual exercise objects to FB
+    // creating copy of exerciseKey array
+    const updatedExerciseKeys = Array.from(this.state.exerciseKeys);
 
+    // map over our exercices collection and send individual exercise objects to FB
+    // getting individual exercise keys
     this.state.exerciseCollection.map(exercise => {
-      console.log(exercise);
-      firebase
+      const exerciseKey = firebase
         .database()
-        .ref(`/${this.state.user.uid}/${routineKey}/${workoutKey}`)
-        .push(exercise);
+        .ref(
+          `/${this.state.user.uid}/${this.state.routineKey}/${
+            this.state.workoutKey
+          }`
+        )
+        .push(exercise).key;
+      // pushing each exercise object into cloned exerciseKey array
+      updatedExerciseKeys.push({ [exercise.exerciseName]: exerciseKey });
     });
 
     const newExercise = {
@@ -180,20 +194,28 @@ class Master extends Component {
       exerciseReps: this.state.exerciseReps
     };
 
-    firebase
+    // pushing last exercise (held in state) to FB, and getting key
+    const lastExerciseKey = firebase
       .database()
-      .ref(`/${this.state.user.uid}/${routineKey}/${workoutKey}`)
-      .push(newExercise);
+      .ref(
+        `/${this.state.user.uid}/${this.state.routineKey}/${
+          this.state.workoutKey
+        }`
+      )
+      .push(newExercise).key;
+    // pushing last key into cloned exerciseKeys array
+    updatedExerciseKeys.push({ [this.state.exerciseName]: lastExerciseKey });
 
-    // "DONE with creating the workout."
     // Re-direct back to user's routine/workout list.
-    this.props.history.push(`/workouts/${routineKey}/${workoutKey}`);
+    this.props.history.push(`/workouts/`);
 
+    // resetting exercise counter, exercise collection
+    // setting exerciseKeys to cloned version
     this.setState({
       exerciseCounter: 1,
-      exerciseCollection: []
+      exerciseCollection: [],
+      exerciseKeys: updatedExerciseKeys
     });
-    
   };
 
   render() {
@@ -209,7 +231,7 @@ class Master extends Component {
           )}
         />
         <Route
-          path="/workouts/:routineKey"
+          path="/workouts/"
           render={() => (
             <Workouts
               handleChange={this.handleChange}
@@ -218,12 +240,12 @@ class Master extends Component {
               routineName={this.state.routineName}
               workoutName={this.state.workoutName}
               workoutCollection={this.state.workoutCollection}
-              workoutKey={this.state.workoutKey}
+              workoutKeys={this.state.workoutKeys}
             />
           )}
         />
         <Route
-          path="/addexercises/:routineKey/:workoutKey"
+          path="/addexercises/"
           render={
             () => (
               <AddExercises
