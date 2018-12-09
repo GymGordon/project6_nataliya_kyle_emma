@@ -6,16 +6,26 @@ class WorkoutView extends Component {
   }
 
   render() {
-    const { routineKeyForWorkoutView } = this.props;
+    const { userData, routineKeyForWorkoutView } = this.props;
+    {const workoutArray = Object.entries((userData[routineKeyForWorkoutView])).pop();}
 
     return (
       <div>
         {this.props.userData && (
           <div>
-            {console.log(Object.entries(this.props.userData[routineKeyForWorkoutView]))}
-            <button>
-              <h2>sup yo</h2>
-            </button>
+            {/* <button>{userData[routineKeyForWorkoutView].routineName}</button> */}
+              {/* {console.log(userData[routineKeyForWorkoutView])} */}
+                {.map(user => {
+                    console.log(user);
+              return (
+                <div>
+
+                  {/* <button key={user[0]} id={user[0]} onClick={goToRoutine}>
+                  {user[1].routineName}
+                </button> */}
+                </div>
+              );
+            })}
           </div>
         )}
       </div>

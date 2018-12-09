@@ -8,15 +8,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    // setTimeout(() => {
-    //   console.log(Object.entries(this.props.userData));
-
-    // }, 2000)
-
-    // const routineCollection = [];
-    // for (let i = 0; i < this.props.routineCounter; i++) {
-    //   routineCollection.push(<RoutineItem />);
-    // }
 
     const { userData, goToRoutine, handleChange, addRoutine } = this.props;
 
@@ -41,7 +32,6 @@ class Dashboard extends Component {
             </form>
             {Object.entries(userData).map(user => (
               <div>
-                {console.log(user, "user")}
                 <button key={user[0]} id={user[0]} onClick={goToRoutine}>
                   {user[1].routineName}
                 </button>
