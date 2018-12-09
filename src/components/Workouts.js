@@ -26,13 +26,17 @@ class Workouts extends Component {
           <input type="submit" value="Add A Workout" />
         </form>
 
-        {this.props.workoutKeys.map(workout => {
-          console.log(workout);
-          return Object.entries(workout).map(x => {
-            console.log(x);
-            return <WorkoutItem workoutName={x[0]} key={x[1]} />;
+        {this.props.workoutKeys.map(keyObject => {
+          return Object.entries(keyObject).map(i => {
+            const workoutName = i[0];
+            const workoutKey = i[1];
+            return <WorkoutItem workoutName={workoutName} workoutKey={workoutKey} />;
           });
         })}
+
+        {this.props.workoutCounter > 0 && (
+          <button onClick={this.props.saveRoutine}>Save Routine</button>
+        )}
       </section>
     );
   }

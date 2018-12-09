@@ -5,11 +5,11 @@ import Dashboard from "./Dashboard";
 import AddExercises from "./AddExercises";
 import Workouts from "./Workouts";
 import Exercises from "./Exercises";
+import WorkoutView from "./WorkoutView";
 import Notes from "./Notes";
 import Logs from "./Logs";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 
-const dbRef = firebase.database().ref();
 const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
@@ -22,9 +22,9 @@ class Master extends Component {
     super();
     this.state = {
       user: null,
-      routineCounter: 1,
+      routineCounter: 0,
       exerciseCounter: 1,
-      workoutCounter: 1,
+      workoutCounter: 0,
       exerciseCollection: [],
       workoutCollection: [],
       workoutKeys: [],
@@ -42,12 +42,22 @@ class Master extends Component {
           () => {
             // create reference specific to user
             this.dbRef = firebase.database().ref(`/${this.state.user.uid}`);
+            this.dbRef.on("value", snapshot => {
+              this.setState({
+                userData: snapshot.val() || {}
+              });
+            });
           }
         );
       }
     });
   }
 
+  componentWillUnmount() {
+    if (this.dbRef) {
+      this.dbRef.off();
+    }
+  }
   // LOGIN FUNCTIONS
 
   logIn = () => {
@@ -89,8 +99,7 @@ class Master extends Component {
     const routineKey = this.dbRef.push(newRoutine).key;
 
     this.setState({
-      routineCounter: this.state.routineCounter + 1,
-      routineKey: routineKey
+      routineKey
     });
 
     // Re-direct
@@ -119,12 +128,11 @@ class Master extends Component {
       .ref(`/${this.state.user.uid}/${this.state.routineKey}`)
       .push(newWorkout).key;
 
-      const updatedWorkoutKeys = Array.from(this.state.workoutKeys)
-      updatedWorkoutKeys.push({
-        [this.state.workoutName]: workoutKey
-      })
+    const updatedWorkoutKeys = Array.from(this.state.workoutKeys);
+    updatedWorkoutKeys.push({
+      [this.state.workoutName]: workoutKey
+    });
 
-    
     // counter appends workout form (Monday) to page
     // set the state of the workoutCollection to the updated workoutCollection array
     this.setState({
@@ -133,8 +141,6 @@ class Master extends Component {
       workoutKey: workoutKey,
       workoutKeys: updatedWorkoutKeys
     });
-
-
 
     // re-direct
     this.props.history.push(`/addexercises/`);
@@ -218,15 +224,53 @@ class Master extends Component {
     });
   };
 
+  saveRoutine = () => {
+    // saving routine function
+    // Direct user to Dashboard
+    this.props.history.push(`/dashboard/`);
+
+    // Update routine counter +1
+    this.setState({
+      routineCounter: this.state.routineCounter + 1,
+      workoutCollection: [],
+      workoutKeys: []
+    });
+
+    // Key attached to routine
+  };
+
+  goToRoutine = e => {
+    const routineKeyForWorkoutView = e.target.id;
+    this.setState({
+      routineKeyForWorkoutView
+    });
+    this.props.history.push(`/workoutview`);
+  };
+
   render() {
     return (
-      <div>
+      <Switch>
         <Route
+          exact
+          path="/"
+          render={() =>
+            !this.state.user ? (
+              <Login logIn={this.logIn} logOut={this.logOut} />
+            ) : (
+              <Redirect to="/dashboard" />
+            )
+          }
+        />
+        <Route
+          exact
           path="/dashboard"
           render={() => (
             <Dashboard
               addRoutine={this.addRoutine}
               handleChange={this.handleChange}
+              routineCounter={this.state.routineCounter}
+              userData={this.state.userData}
+              goToRoutine={this.goToRoutine}
             />
           )}
         />
@@ -241,36 +285,36 @@ class Master extends Component {
               workoutName={this.state.workoutName}
               workoutCollection={this.state.workoutCollection}
               workoutKeys={this.state.workoutKeys}
+              saveRoutine={this.saveRoutine}
             />
           )}
         />
         <Route
           path="/addexercises/"
-          render={
-            () => (
-              <AddExercises
-                handleChange={this.handleChange}
-                saveWorkout={this.saveWorkout}
-                addExercise={this.addExercise}
-                exerciseCounter={this.state.exerciseCounter}
-                workoutName={this.state.workoutName}
-              />
-            )
-            // exerciseName={this.exerciseName}
-            // exerciseSets={this.exerciseSets}
-            // exerciseReps={this.exerciseReps}
-          }
+          render={() => (
+            <AddExercises
+              handleChange={this.handleChange}
+              saveWorkout={this.saveWorkout}
+              addExercise={this.addExercise}
+              exerciseCounter={this.state.exerciseCounter}
+              workoutName={this.state.workoutName}
+            />
+          )}
         />
 
+        <Route
+          path="/workoutview"
+          render={() => (
+            <WorkoutView
+              userData={this.state.userData}
+              routineKeyForWorkoutView={this.state.routineKeyForWorkoutView}
+            />
+          )}
+        />
         <Route path="/exercises" render={() => <Exercises />} />
         <Route path="/notes" render={() => <Notes />} />
         <Route path="/logs" render={() => <Logs />} />
-        {this.state.user ? (
-          <Redirect to={"/dashboard"} />
-        ) : (
-          <Login logIn={this.logIn} logOut={this.logOut} />
-        )}
-      </div>
+      </Switch>
     );
   }
 }

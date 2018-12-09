@@ -12,9 +12,6 @@ class AddExercises extends Component {
     for (let i = 0; i < this.props.exerciseCounter; i++) {
       exerciseForms.push(
         <ExerciseForm
-          // exerciseName={this.props.exerciseName}
-          // exerciseSets={this.props.exerciseSets}
-          // exerciseReps={this.props.exerciseReps}
           handleChange={this.props.handleChange}
         />
       );
