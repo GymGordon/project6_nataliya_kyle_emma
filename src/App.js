@@ -11,17 +11,10 @@ import {
 } from "react-router-dom";
 import Master from "./components/Master";
 
-const dbRef = firebase.database().ref();
-const provider = new firebase.auth.GoogleAuthProvider();
-const auth = firebase.auth();
+
 
 class App extends Component {
-  componentWillUnmount() {
-    if (this.dbRef) {
-      this.dbRef.off();
-    }
-  }
-
+  
   render() {
     // router
     // render master
