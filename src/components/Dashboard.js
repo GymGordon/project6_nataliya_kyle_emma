@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import RoutineItem from "./RoutineItem";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -20,11 +18,11 @@ class Dashboard extends Component {
               </label>
               <div className="inputDiv clearfix">
                 <input required onChange={handleChange} type="text" name="routineName" id="routineName" placeholder="Routine Name" />
-                <input type="submit" value=">" />
+                <input className="btn--add" type="submit" value=">" />
               </div>
             </form>
             {Object.entries(userData).map(user => <div>
-                <button key={user[0]} id={user[0]} onClick={goToRoutine}>
+                <button className="btn--goTo" key={user[0]} id={user[0]} onClick={goToRoutine}>
                   {user[1].routineName}
                 </button>
               </div>)}

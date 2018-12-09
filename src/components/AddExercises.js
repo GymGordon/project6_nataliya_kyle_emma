@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Route, Redirect, withRouter } from "react-router-dom";
 import ExerciseForm from "./ExerciseForm";
 
 class AddExercises extends Component {
@@ -8,18 +6,17 @@ class AddExercises extends Component {
     super(props);
   }
   render() {
-
-    const { handleChange, exerciseCounter, saveWorkout, workoutName, addExercise } = this.props;
-
-
+    const {
+      handleChange,
+      exerciseCounter,
+      saveWorkout,
+      workoutName,
+      addExercise
+    } = this.props;
 
     const exerciseForms = [];
     for (let i = 0; i < exerciseCounter; i++) {
-      exerciseForms.push(
-        <ExerciseForm
-          handleChange={handleChange}
-        />
-      );
+      exerciseForms.push(<ExerciseForm handleChange={handleChange} />);
     }
 
     return (
@@ -43,4 +40,4 @@ class AddExercises extends Component {
   }
 }
 
-export default withRouter(AddExercises);
+export default AddExercises;

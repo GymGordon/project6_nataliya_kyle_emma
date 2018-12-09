@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import firebase from "./firebase";
 import WorkoutItem from "./WorkoutItem";
 
 class Workouts extends Component {
@@ -8,11 +6,17 @@ class Workouts extends Component {
     super(props);
   }
   render() {
-
-    const { workoutKeys, workoutCounter, handleChange, addWorkout, routineName, saveRoutine} = this.props;
+    const {
+      workoutKeys,
+      workoutCounter,
+      handleChange,
+      addWorkout,
+      routineName,
+      saveRoutine
+    } = this.props;
 
     return (
-      <section className="Workouts">
+      <section className="workouts">
         <h2>{routineName}</h2>
         <form action="" onSubmit={addWorkout}>
           <label className="visuallyhidden" htmlFor="workoutName">
@@ -26,14 +30,16 @@ class Workouts extends Component {
             id="workoutName"
             placeholder="Workout Name"
           />
-          <input type="submit" value=">" />
+          <input className="btn--" type="submit" value=">" />
         </form>
 
         {workoutKeys.map(keyObject => {
           return Object.entries(keyObject).map(i => {
             const workoutName = i[0];
             const workoutKey = i[1];
-            return <WorkoutItem workoutName={workoutName} workoutKey={workoutKey} />;
+            return (
+              <WorkoutItem workoutName={workoutName} workoutKey={workoutKey} />
+            );
           });
         })}
 
@@ -45,4 +51,4 @@ class Workouts extends Component {
   }
 }
 
-export default withRouter(Workouts);
+export default Workouts;

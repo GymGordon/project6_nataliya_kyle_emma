@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class ExerciseViewForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
   render() {
     const {
