@@ -6,6 +6,7 @@ import AddExercises from "./AddExercises";
 import Workouts from "./Workouts";
 import Exercises from "./Exercises";
 import WorkoutView from "./WorkoutView";
+import ExerciseView from "./ExerciseView";
 import Notes from "./Notes";
 import Logs from "./Logs";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
@@ -247,7 +248,18 @@ class Master extends Component {
     this.props.history.push(`/workoutview`);
   };
 
+  viewExercises = e => {
+    const workoutKeyForExerciseView = e.target.id;
+    this.setState({
+      workoutKeyForExerciseView
+    });
+    //direct user to exerciseview component
+    this.props.history.push(`/exerciseview`);
+  }
+
   render() {
+    const { userData, routineKeyForWorkoutView, routineCounter, workoutCounter, routineName, workoutName, workoutCollection, workoutKeys, exerciseCounter, workoutKeyForExerciseView } = this.state;
+
     return (
       <Switch>
         <Route
@@ -268,8 +280,8 @@ class Master extends Component {
             <Dashboard
               addRoutine={this.addRoutine}
               handleChange={this.handleChange}
-              routineCounter={this.state.routineCounter}
-              userData={this.state.userData}
+              routineCounter={routineCounter}
+              userData={userData}
               goToRoutine={this.goToRoutine}
             />
           )}
@@ -280,11 +292,11 @@ class Master extends Component {
             <Workouts
               handleChange={this.handleChange}
               addWorkout={this.addWorkout}
-              workoutCounter={this.state.workoutCounter}
-              routineName={this.state.routineName}
-              workoutName={this.state.workoutName}
-              workoutCollection={this.state.workoutCollection}
-              workoutKeys={this.state.workoutKeys}
+              workoutCounter={workoutCounter}
+              routineName={routineName}
+              workoutName={workoutName}
+              workoutCollection={workoutCollection}
+              workoutKeys={workoutKeys}
               saveRoutine={this.saveRoutine}
             />
           )}
@@ -296,8 +308,8 @@ class Master extends Component {
               handleChange={this.handleChange}
               saveWorkout={this.saveWorkout}
               addExercise={this.addExercise}
-              exerciseCounter={this.state.exerciseCounter}
-              workoutName={this.state.workoutName}
+              exerciseCounter={exerciseCounter}
+              workoutName={workoutName}
             />
           )}
         />
@@ -306,11 +318,21 @@ class Master extends Component {
           path="/workoutview"
           render={() => (
             <WorkoutView
-              userData={this.state.userData}
-              routineKeyForWorkoutView={this.state.routineKeyForWorkoutView}
+              userData={userData}
+              routineKeyForWorkoutView={routineKeyForWorkoutView}
+              viewExercises={this.viewExercises}
             />
           )}
         />
+        <Route 
+        path="/exerciseview" 
+        render={() => (
+        <ExerciseView
+          userData={userData}
+          workoutKeyForExerciseView={workoutKeyForExerciseView}
+          routineKeyForWorkoutView={routineKeyForWorkoutView}
+        />)} />
+
         <Route path="/exercises" render={() => <Exercises />} />
         <Route path="/notes" render={() => <Notes />} />
         <Route path="/logs" render={() => <Logs />} />
