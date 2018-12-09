@@ -6,19 +6,29 @@ class WorkoutView extends Component {
   }
 
   render() {
-      const { userData, routineKeyForWorkoutView, viewExercises } = this.props;
+    const {
+      goBack,
+      userData,
+      routineKeyForWorkoutView,
+      viewExercises
+    } = this.props;
     const workoutArray = Object.entries(userData[routineKeyForWorkoutView]);
     const remove = () => workoutArray.pop();
     remove();
 
     return (
-      <div>
+      <section className="workoutView">
         {this.props.userData && (
           <div>
             {workoutArray.map(workout => {
               return (
                 <div>
-                  <button key={workout[0]} id={workout[0]} onClick={viewExercises}>
+                  <button
+                  className="btn--goTo"
+                    key={workout[0]}
+                    id={workout[0]}
+                    onClick={viewExercises}
+                  >
                     {workout[1].workoutName}
                   </button>
                 </div>
@@ -26,7 +36,8 @@ class WorkoutView extends Component {
             })}
           </div>
         )}
-      </div>
+        <button onClick={goBack}>Go Back</button>
+      </section>
     );
   }
 }

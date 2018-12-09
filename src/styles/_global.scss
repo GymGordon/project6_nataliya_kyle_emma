@@ -1,4 +1,3 @@
-
 $headingText: 'Bowlby One SC', cursive;
 $bodyText: 'Nunito', sans-serif;
 
@@ -15,12 +14,13 @@ html {
 }
 
 body {
-  font-size: 1.8rem;
-  font-family: $bodyText;
+  background: #f5f9fe;
 }
 
 header {
-  padding: 10px 0;
+  background: linear-gradient(to right, #0575E6, #00F260);
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+  margin-bottom: 25px;
 }
 
 .wrapper {
@@ -30,37 +30,56 @@ header {
 }
 
 
-h1, h2, h3 {
-    font-family: $headingText;
-    letter-spacing: 1px;
-}
 
-h1 {
-    font-size: 2.2rem;
-    margin: 10px 0 20px 0;
-}
-
-h2 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
 
 label {
   display: block;
   margin: 10px 0;
 }
 
+// in the dashboard
+.inputDiv {
+  // border: 1px solid red;
+  input {
+    float: left;
+  }
+}
+
 input {
   padding: 2px 5px;
   text-align: center;
-  border: 1px solid black;
+  border-radius: 5px;
+  border: none;
   // width: 100%;
 }
 
 input[type="submit"] {
   display: block;
   margin: 10px auto;
+  // width: 30px;
+  // height: 30px;
+  // border-radius: 50%;
+  // background: #a4e000;
+  // color: black;
 }
+
+button {
+  // background: white;
+  // padding: 20px 20px;
+  // border: none;
+  // border-radius: 3px;
+  width: 100%;
+  // margin: 5px 0;
+  // color: white;
+  // text-align: left;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  // &:hover {
+  //   background: #8ce8ff;
+  //   // color: white;
+  // }
+}
+
+
 
 fieldset {
   border: none;
@@ -71,10 +90,32 @@ fieldset {
   float: left;
 }
 
+// ADD EXERCISES
 .exerciseLabels {
-  
   label {
     float: left;
     width: 33.33%;
   }
 }
+
+
+
+
+// EXERCISE VIEW
+.exerciseCard {
+  background: white;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  padding: 10px 0;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  h3 {
+    float: left;
+    width: 33.33%;
+  }
+  fieldset input {
+    float: left;
+    border: 1px solid rgba(0,0,0,0.2);
+    width: 33.33%;
+  }
+}
+

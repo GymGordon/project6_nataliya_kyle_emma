@@ -1,16 +1,22 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import firebase from "./firebase";
-
 
 class Notes extends Component {
-    render() {
-        return (
-            <div className="notes">
-                <h2>Notes</h2>
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const { saveNotes, goBack } = this.props;
+    return (
+      <div className="notes">
+        <h2>Notes</h2>
+        <form action="" onSubmit={saveNotes}>
+          <textarea>This is stuff</textarea>
+          <input type="submit" value="Okay" />
+        </form>
+        <button onClick={goBack}>Go Back</button>
+      </div>
+    );
+  }
 }
 
-export default Notes
+export default Notes;

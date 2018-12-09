@@ -6,11 +6,14 @@ class WorkoutItem extends Component {
     this.state = {};
   }
   render() {
+
+    const { workoutKey, workoutName } = this.props;
+
     return (
       <div>
         {
-            <button key={this.props.workoutKey}>
-              {this.props.workoutName}
+            <button key={workoutKey}>
+              {workoutName}
             </button>
         }
       </div>
