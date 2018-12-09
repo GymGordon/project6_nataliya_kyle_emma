@@ -1,0 +1,40 @@
+body {
+  font-size: 1.8rem;
+  font-family: $bodyText;
+  color: darkgreen;
+}
+
+
+h1, h2, h3 {
+    // font-family: $headingText;
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+}
+
+// GYM GORDON
+h1 {
+    font-size: 2.2rem;
+    color: yellow;
+    text-align: left;
+    padding: 2vh 0;
+}
+
+// EXERCISE NAME
+h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: blue;
+}
+
+// WEIGHT/REPS/SETS
+h3 {
+    font-size: 1.6rem;
+    color: darkorchid;
+    font-weight: 400;
+}
+
+::placeholder {
+    color: orangered;
+}
