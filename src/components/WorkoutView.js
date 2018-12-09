@@ -6,7 +6,7 @@ class WorkoutView extends Component {
   }
 
   render() {
-      const { userData, routineKeyForWorkoutView, viewExercises } = this.props;
+    const { userData, routineKeyForWorkoutView, viewExercises } = this.props;
     const workoutArray = Object.entries(userData[routineKeyForWorkoutView]);
     const remove = () => workoutArray.pop();
     remove();

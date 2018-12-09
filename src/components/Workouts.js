@@ -8,16 +8,19 @@ class Workouts extends Component {
     super(props);
   }
   render() {
+
+    const { workoutKeys, workoutCounter, handleChange, addWorkout, routineName, saveRoutine} = this.props;
+
     return (
       <section className="Workouts">
-        <h2>{this.props.routineName}</h2>
-        <form action="" onSubmit={this.props.addWorkout}>
+        <h2>{routineName}</h2>
+        <form action="" onSubmit={addWorkout}>
           <label className="visuallyhidden" htmlFor="workoutName">
             Workout Name
           </label>
           <input
             required
-            onChange={this.props.handleChange}
+            onChange={handleChange}
             type="text"
             name="workoutName"
             id="workoutName"
@@ -26,7 +29,7 @@ class Workouts extends Component {
           <input type="submit" value="Add A Workout" />
         </form>
 
-        {this.props.workoutKeys.map(keyObject => {
+        {workoutKeys.map(keyObject => {
           return Object.entries(keyObject).map(i => {
             const workoutName = i[0];
             const workoutKey = i[1];
@@ -34,8 +37,8 @@ class Workouts extends Component {
           });
         })}
 
-        {this.props.workoutCounter > 0 && (
-          <button onClick={this.props.saveRoutine}>Save Routine</button>
+        {workoutCounter > 0 && (
+          <button onClick={saveRoutine}>Save Routine</button>
         )}
       </section>
     );

@@ -5,12 +5,15 @@ class ExerciseForm extends Component {
     super(props);
   }
   render() {
+
+    const { handleChange } = this.props;
+
     return (
       <fieldset className="clearfix">
         <div className="exerciseInputs">
           <input
             required
-            onChange={this.props.handleChange}
+            onChange={handleChange}
             type="text"
             id="exerciseName"
           />
@@ -19,7 +22,7 @@ class ExerciseForm extends Component {
         <div className="exerciseInputs">
           <input
             required
-            onChange={this.props.handleChange}
+            onChange={handleChange}
             type="text"
             id="exerciseSets"
           />
@@ -28,7 +31,7 @@ class ExerciseForm extends Component {
         <div className="exerciseInputs">
           <input
             required
-            onChange={this.props.handleChange}
+            onChange={handleChange}
             type="text"
             id="exerciseReps"
           />
