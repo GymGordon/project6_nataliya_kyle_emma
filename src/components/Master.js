@@ -86,7 +86,13 @@ class Master extends Component {
       [e.target.id]: e.target.value
     });
   };
-
+  
+  handleChecked = e => {
+    this.setState({
+      ...this.state,
+      [e.target.id]: e.target.checked
+    });
+  };
   // ADD ROUTINE
 
   addRoutine = e => {
@@ -331,6 +337,7 @@ class Master extends Component {
           userData={userData}
           workoutKeyForExerciseView={workoutKeyForExerciseView}
           routineKeyForWorkoutView={routineKeyForWorkoutView}
+          handleChange={this.handleChange}
         />)} />
 
         <Route path="/exercises" render={() => <Exercises />} />

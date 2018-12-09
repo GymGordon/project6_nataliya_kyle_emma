@@ -26,7 +26,7 @@ class Workouts extends Component {
             id="workoutName"
             placeholder="Workout Name"
           />
-          <input type="submit" value="Add A Workout" />
+          <input type="submit" value=">" />
         </form>
 
         {workoutKeys.map(keyObject => {

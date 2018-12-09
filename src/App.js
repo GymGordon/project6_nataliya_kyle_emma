@@ -22,7 +22,9 @@ class App extends Component {
     return <Router>
         <div className="App">
           <header>
-            <h1>Gym Gordon</h1>
+            <div className="wrapper">
+              <h1>Gym Gordon</h1>
+            </div>
           </header>
             <div className="wrapper">
               <Master history={this.props.history} />
