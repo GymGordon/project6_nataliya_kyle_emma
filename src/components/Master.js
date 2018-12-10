@@ -234,6 +234,8 @@ class Master extends Component {
     });
   };
 
+  // SAVE ROUTINE
+
   saveRoutine = () => {
     // saving routine function
     // Direct user to Dashboard
@@ -249,13 +251,17 @@ class Master extends Component {
     // Key attached to routine
   };
 
+  // GO TO ROUTINE
+
   goToRoutine = e => {
     const routineKeyForWorkoutView = e.target.id;
     this.setState({
       routineKeyForWorkoutView
     });
-    this.props.history.push(`/workoutview`);
+    this.props.history.push(`/workoutview/${routineKeyForWorkoutView}`);
   };
+
+  // VIEW EXERCISE
 
   viewExercises = e => {
     const workoutKeyForExerciseView = e.target.id;
@@ -263,8 +269,14 @@ class Master extends Component {
       workoutKeyForExerciseView
     });
     //direct user to exerciseview component
-    this.props.history.push(`/exerciseview`);
+    this.props.history.push(
+      `/exerciseview/${
+        this.state.routineKeyForWorkoutView
+      }/${workoutKeyForExerciseView}`
+    );
   };
+
+  // FINISH WORKOUT
 
   finishWorkout = e => {
     e.preventDefault();
@@ -273,6 +285,8 @@ class Master extends Component {
       console.log("works");
     }
   };
+
+  // SAVE NOTES
 
   saveNotes = e => {
     e.preventDefault();
@@ -352,7 +366,7 @@ class Master extends Component {
         />
 
         <Route
-          path="/workoutview"
+          path="/workoutview/:routineKey"
           render={() => (
             <WorkoutView
               userData={userData}
@@ -363,7 +377,7 @@ class Master extends Component {
           )}
         />
         <Route
-          path="/exerciseview"
+          path="/exerciseview/:routineKey/:workoutKey"
           render={() => (
             <ExerciseView
               userData={userData}
