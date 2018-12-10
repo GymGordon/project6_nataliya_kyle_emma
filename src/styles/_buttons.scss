@@ -1,11 +1,9 @@
-
 .btn--add {
-  margin: 10px auto;
-  width: 30px;
-  height: 30px;
+  margin-left: 10px;
   border-radius: 50%;
-  background: #a4e000;
-  color: black;
+  //   background: #a4e000;
+  //   color: black;
+  border: none;
 }
 
 .btn--goTo {
@@ -21,4 +19,10 @@
     background: #8ce8ff;
     // color: white;
   }
+}
+
+.fa-arrow-circle-right {
+  color: #a4e000;
+  font-size: 3.5rem;
+  padding: 10px 0;
 }
