@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 class WorkoutView extends Component {
   constructor(props) {
@@ -12,15 +13,22 @@ class WorkoutView extends Component {
       routineKeyForWorkoutView,
       viewExercises
     } = this.props;
-    const workoutArray = Object.entries(userData[routineKeyForWorkoutView]);
-    const remove = () => workoutArray.pop();
-    remove();
+
+    if (userData){
+      const routineKey = this.props.match.params.routineKey
+  
+      this.workoutArray = Object.entries(userData[routineKey]);
+      const remove = () => this.workoutArray.pop();
+      remove();
+    }
+
+    // userData && ()
 
     return (
       <section className="workoutView">
         {this.props.userData && (
           <div>
-            {workoutArray.map(workout => {
+            {this.workoutArray.map(workout => {
               return (
                 <div>
                   <button
@@ -42,4 +50,4 @@ class WorkoutView extends Component {
   }
 }
 
-export default WorkoutView;
+export default withRouter(WorkoutView);
