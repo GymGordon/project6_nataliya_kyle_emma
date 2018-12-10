@@ -6,16 +6,16 @@ class Notes extends Component {
   }
   render() {
     const { saveNotes, goBack } = this.props;
-    return (
-      <div className="notes">
+    return <div className="notes">
         <h2>Notes</h2>
         <form action="" onSubmit={saveNotes}>
           <textarea>This is stuff</textarea>
           <input type="submit" value="Okay" />
         </form>
-        <button onClick={goBack}>Go Back</button>
-      </div>
-    );
+        <button className="btn--goBack" onClick={goBack}>
+          <i class="fas fa-long-arrow-alt-left" />Go Back
+        </button>
+      </div>;
   }
 }
 

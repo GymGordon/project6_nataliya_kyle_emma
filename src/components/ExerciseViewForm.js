@@ -7,7 +7,7 @@ class ExerciseViewForm extends Component {
   render() {
     const {
       exerciseReps,
-      handleChange,
+      exerciseUpdate,
       exerciseName,
       handleChecked,
       index
@@ -17,12 +17,12 @@ class ExerciseViewForm extends Component {
         <label className="visuallyhidden" htmlFor="weight">
           Weight
         </label>
-        <input type="text" id={`${exerciseName}Weight${index}`} placeholder="lbs" onChange={handleChange} />
+        <input type="text" id={`${exerciseName}Weight${index}`} placeholder="lbs" onChange={exerciseUpdate} />
 
         <label className="visuallyhidden" htmlFor="reps">
           Reps
         </label>
-        <input type="text" id={`${exerciseName}Reps${index}`} placeholder={exerciseReps} onChange={handleChange} />
+      <input type="text" id={`${exerciseName}Reps${index}`} placeholder={exerciseReps} onChange={exerciseUpdate} />
 
         <label className="visuallyhidden" htmlFor="completed">
           Done

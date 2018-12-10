@@ -1,7 +1,6 @@
 body {
   font-size: 1.8rem;
   font-family: $bodyText;
-  color: darkgreen;
 }
 
 
@@ -14,10 +13,9 @@ h1, h2, h3 {
 
 // GYM GORDON
 h1 {
-    font-size: 2.2rem;
-    color: yellow;
-    text-align: left;
-    padding: 2vh 0;
+    font-size: 2.5rem;
+    padding: 2vh 20px 1vh 20px;
+    letter-spacing: 0px;
 }
 
 // EXERCISE NAME
@@ -36,5 +34,5 @@ h3 {
 }
 
 ::placeholder {
-    color: orangered;
+    color: #777777;
 }

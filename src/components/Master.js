@@ -276,15 +276,7 @@ class Master extends Component {
     );
   };
 
-  // FINISH WORKOUT
 
-  finishWorkout = e => {
-    e.preventDefault();
-    this.props.history.push(`/notes`);
-    {
-      console.log("works");
-    }
-  };
 
   // SAVE NOTES
 
@@ -392,7 +384,7 @@ class Master extends Component {
 
         <Route
           path="/notes"
-          render={() => <Notes saveNotes={this.saveNotes} />}
+          render={() => <Notes saveNotes={this.saveNotes} goBack={this.goBack}/>}
         />
         <Route path="/logs" render={() => <Logs />} />
       </Switch>

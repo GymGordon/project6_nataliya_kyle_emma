@@ -1,5 +1,5 @@
-$headingText: 'Bowlby One SC', cursive;
-$bodyText: 'Nunito', sans-serif;
+$headingText: "Bowlby One SC", cursive;
+$bodyText: "Nunito", sans-serif;
 
 $mainColor1: #3b3b3b;
 $mainColor2: #006882;
@@ -15,22 +15,23 @@ html {
 
 body {
   background: #f5f9fe;
+  color: #3b3b3b;
 }
 
 header {
-  background: linear-gradient(to right, #0575E6, #00F260);
-  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+  // background: white;
+  background: rgba(63, 255, 140, 0.4);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
   margin-bottom: 25px;
+  text-align: center;
 }
 
 .wrapper {
   width: 95vw;
   max-width: 1280px;
   margin: 0 auto;
+  // border: 1px solid red;
 }
-
-
-
 
 label {
   display: block;
@@ -39,66 +40,35 @@ label {
 
 //Dashboard
 //Workouts
-.userInputContainer {
-  // border: 1px solid red;
-  display:inline-block;
-  margin-bottom: 20px;
-  // width: 50%;
-  input {
-    float: left;
-    border-bottom: 5px solid #0575E6;
-    // width: 80%;
-    // border: 1px solid black;
-    // padding: 2px 5px;
-
-  }
+  .userInputContainer {
+    display: inline-block;
+    margin-bottom: 20px;
+    input {
+      float: left;
+      font-style: italic;
+      border: 5px solid rgba(63, 255, 140, 0.4);
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+      border-radius: 50px;
+    }
 }
 
 .test {
   text-align: center;
 }
 
-
 input {
   padding: 15px 10px;
   text-align: center;
-  border-radius: 5px;
   border: none;
-  // width: 100%;
 }
 
 input[type="submit"] {
   display: block;
-  // margin: 10px auto;
-  // width: 30px;
-  // height: 30px;
-  // border-radius: 50%;
-  // background: #a4e000;
-  // color: black;
 }
-
-button {
-  background: none;
-  // background: white;
-  // padding: 20px 20px;
-  // border: none;
-  // border-radius: 3px;
-  // width: 100%;
-  // margin: 5px 0;
-  // color: white;
-  // text-align: left;
-  // box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  // &:hover {
-  //   background: #8ce8ff;
-  //   // color: white;
-  // }
-}
-
-
 
 fieldset {
   border: none;
-  margin-bottom:25px;
+  margin-bottom: 25px;
 }
 .exerciseInputs {
   width: 33.33%;
@@ -113,13 +83,10 @@ fieldset {
   }
 }
 
-
-
-
 // EXERCISE VIEW
 .exerciseCard {
   background: white;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   padding: 10px 0;
   margin-bottom: 15px;
   border-radius: 5px;
@@ -129,8 +96,7 @@ fieldset {
   }
   fieldset input {
     float: left;
-    border: 1px solid rgba(0,0,0,0.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     width: 33.33%;
   }
 }
-
