@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ExerciseViewForm from "./ExerciseViewForm";
 import date from "./date";
 import { withRouter } from "react-router-dom";
+import firebase from "./firebase";
 
 class ExerciseView extends Component {
   constructor(props) {
@@ -11,39 +12,56 @@ class ExerciseView extends Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const { userData } = this.props;
-    if(userData) {
-      console.log(this.exerciseArray)
-      this.exerciseArray.map(exercise => {
-        return this.setState({
-          completedWorkout: {
-            ...this.state.completedWorkout,
-            [exercise[1].exerciseName]: []
-          }
-        });
+    if (userData) {
+      let updatedWorkout = Object.assign({}, this.state.completedWorkout);
+      const setObj = {
+        weight: "",
+        reps: ""
+      };
+
+      this.exerciseArray.forEach(exercise => {
+        let exerciseName = exercise[1].exerciseName;
+        updatedWorkout[exerciseName] = [];
+        for (let i = 0; i < exercise[1].exerciseSets; i++) {
+          updatedWorkout[exerciseName].push(setObj);
+        }
+      });
+      this.setState({
+        completedWorkout: updatedWorkout
       });
     }
   }
-  
-  exerciseUpdate = e => {
-    this.setState({
-      ...this.state,
-      [e.target.id]: e.target.value
+
+  exerciseUpdate = (e, exerciseName, index) => {
+    let updatedWorkout = JSON.stringify(this.state.completedWorkout);
+    let updatedWorkoutParsed = JSON.parse(updatedWorkout);
+
+    updatedWorkoutParsed[exerciseName][index][e.target.id] = e.target.value;
+
+    this.setState({ 
+      completedWorkout: updatedWorkoutParsed
     });
   };
 
   // FINISH WORKOUT
 
   finishWorkout = e => {
+    const routineKey = this.props.match.params.routineKey;
+    const workoutKey = this.props.match.params.workoutKey;
     e.preventDefault();
     // this.props.history.push(`/notes`);
     this.setState({
       completedWorkout: {
+        ...this.state.completedWorkout,
         date: date
-        // exerciseName: this.state.
       }
     });
+    firebase
+      .database()
+      .ref(`/${this.props.uid}/${routineKey}/${workoutKey}/completedWorkouts`)
+      .update(this.state.completedWorkout);
   };
 
   render() {

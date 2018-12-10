@@ -378,6 +378,7 @@ class Master extends Component {
               handleChange={this.handleChange}
               finishWorkout={this.finishWorkout}
               goBack={this.goBack}
+              uid={this.state.user.uid}
             />
           )}
         />
