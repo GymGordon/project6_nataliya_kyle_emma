@@ -81,7 +81,7 @@ class ExerciseView extends Component {
           .push(this.state.completedWorkout).key;
 
         // re-direct
-        this.props.history.push(`/notes/${routineKey}/${workoutKey}/${completedWorkoutKey}`);
+        this.props.history.push(`/addnotes/${routineKey}/${workoutKey}/${completedWorkoutKey}`);
       }
     );
   };

@@ -5,6 +5,8 @@ $mainColor1: #3b3b3b;
 $mainColor2: #006882;
 $accentColor: #a4e000;
 
+
+
 html {
   font-size: 62.5%;
 }
@@ -21,9 +23,12 @@ body {
 header {
   // background: white;
   background: rgba(63, 255, 140, 0.4);
+  background: #006882;
+  background: #4748f3;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
   margin-bottom: 25px;
   text-align: center;
+  color: white;
 }
 
 .wrapper {
@@ -51,9 +56,10 @@ label {
     input {
       float: left;
       font-style: italic;
-      border: 5px solid rgba(63, 255, 140, 0.4);
+      border: 3px solid rgba(63, 255, 140, 0.4);
+      border: 3px solid #006882;
       box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-      border-radius: 50px;
+      border-radius: 5px;
     }
 }
 

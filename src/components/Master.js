@@ -6,7 +6,8 @@ import AddExercises from "./AddExercises";
 import Workouts from "./Workouts";
 import WorkoutView from "./WorkoutView";
 import ExerciseView from "./ExerciseView";
-import Notes from "./Notes";
+import AddNotes from "./AddNotes";
+import NotesView from "./NotesView";
 import History from "./History";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 
@@ -369,9 +370,9 @@ class Master extends Component {
         />
 
         <Route
-          path="/notes/:routineKey/:workoutKey/:completedWorkoutKey"
+          path="/addnotes/:routineKey/:workoutKey/:completedWorkoutKey"
           render={() => 
-          <Notes 
+          <AddNotes 
             goBack={this.goBack}
             userData={userData}
             uid={this.state.user.uid}
@@ -379,6 +380,12 @@ class Master extends Component {
         />
         <Route path="/history/:completedWorkoutKey" render={() => 
           <History
+            goBack={this.goBack}
+            userData={userData}
+            uid={this.state.user.uid}
+          />} />
+        <Route path="/notesview/:workoutKey" render={() =>
+          <NotesView
             goBack={this.goBack}
             userData={userData}
             uid={this.state.user.uid}

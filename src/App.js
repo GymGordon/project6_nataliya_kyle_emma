@@ -14,7 +14,7 @@ class App extends Component {
         <div className="App">
           <header>
             <div className="wrapper">
-              <h1>Goodlife Fitness</h1>
+              <h1>FleX Fitness</h1>
             </div>
           </header>
 
