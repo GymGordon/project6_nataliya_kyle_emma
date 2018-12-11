@@ -51,7 +51,6 @@ class ExerciseView extends Component {
     const routineKey = this.props.match.params.routineKey;
     const workoutKey = this.props.match.params.workoutKey;
     e.preventDefault();
-    // this.props.history.push(`/notes`);
     this.setState({
       completedWorkout: {
         ...this.state.completedWorkout,
@@ -63,6 +62,8 @@ class ExerciseView extends Component {
         .ref(`/users/${this.props.uid}/completedWorkouts/routines/${routineKey}/workouts/${workoutKey}`)
         .update(this.state.completedWorkout);
     });
+    // re-direct
+    this.props.history.push(`/notes/${routineKey}/${workoutKey}`);
     
   };
 

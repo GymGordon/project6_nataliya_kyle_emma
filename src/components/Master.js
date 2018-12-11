@@ -379,8 +379,13 @@ class Master extends Component {
         />
 
         <Route
-          path="/notes"
-          render={() => <Notes saveNotes={this.saveNotes} goBack={this.goBack}/>}
+          path="/notes/:routineKey/:workoutKey"
+          render={() => 
+          <Notes 
+            saveNotes={this.saveNotes} 
+            goBack={this.goBack}
+            userData={userData}
+            />}
         />
         <Route path="/logs" render={() => <Logs />} />
       </Switch>
