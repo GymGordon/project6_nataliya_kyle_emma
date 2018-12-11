@@ -27,15 +27,17 @@ class Dashboard extends Component {
               </div>
             </form>
             {/* {userData.routines || {}} */}
+            <div className="wrapper clearfix">
             {Object.entries(userData.routines).map(user => 
-            <div>
-                <button className="btn--goTo" key={user[0]} id={user[0]} onClick={goToRoutine}>
+                <button className="emma btn--goTo" key={user[0]} id={user[0]} onClick={goToRoutine}>
                   <div className="goTo clearfix">
                     {user[1].routineName}
                     <i class="fas fa-angle-right" />
                   </div>
                 </button>
-              </div>)}
+              )
+            }
+        </div>
           </div>}
       </section>;
   }

@@ -23,9 +23,9 @@ class Workouts extends Component {
               Workout Name
             </label>
             <input required onChange={handleChange} type="text" name="workoutName" id="workoutName" placeholder="Workout Name" />
-          <button className="btn--add" type="submit">
-            <i class="fas fa-plus-circle" />
-          </button>
+            <button className="btn--add" type="submit">
+              <i class="fas fa-plus" />
+            </button>
           </div>
         </form>
 

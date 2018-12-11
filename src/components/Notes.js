@@ -16,8 +16,6 @@ class Notes extends Component {
         Object.entries(
           userData.completedWorkouts.routines[routineKey].workouts[workoutKey]
         ).map(workout => {
-          console.log(workout)
-          console.log(workout[0]);
           // return (
           //   <div>
           //     <p>{workout[1]}</p>
@@ -33,7 +31,14 @@ class Notes extends Component {
           <textarea>This is stuff</textarea>
           <input type="submit" value="Okay" />
         </form>
+
         {this.printWorkoutHistory()}
+
+        <div>
+          {}
+        </div>
+
+
         <button className="btn--goBack" onClick={goBack}>
           <i class="fas fa-long-arrow-alt-left" />
           Go Back

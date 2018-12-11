@@ -10,19 +10,20 @@ button {
     .fa-plus {
         margin-left: 15px;
         font-size: 3rem;
-        padding: 10px 0;
+        padding: 7px 0;
         color: #006882;
     }
 }
 
 // BUTTON &: go to routine, go to workout
+
 .btn--goTo {
+width: calc(50% - 20px);
+  float: left;
+  margin: 8px 10px;
   background: white;
   padding: 20px;
   border-radius: 4px;
-  width: calc(50% - 20px);
-  float: left;
-  margin: 8px;
   text-align: left;
   height: 90px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -39,6 +40,33 @@ button {
         color: rgba(0,0,0,0.1);
         color: rgba(0, 101, 127,0.2);
     }
+}
+
+@media (max-width: 600px) {
+  .btn--goTo {
+    //   border: 1px solid red;
+    padding: 20px;
+    border-radius: 4px;
+    width: 100%;
+    float: none;
+    margin: 8px 0;
+    height: 90px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background:rgba(63, 255, 140,0.4);
+  }
+    &:hover .fa-angle-right {
+        color: #3b3b3b;
+    }
+    .fa-angle-right {
+        float: right;
+        margin-left: 10px;
+        font-size: 2.5rem;
+        color: rgba(0,0,0,0.1);
+        color: rgba(0, 101, 127,0.2);
+    }
+}
+    
 }
 
 .btn--goBack {

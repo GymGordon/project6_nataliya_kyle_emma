@@ -8,14 +8,19 @@ class ExerciseView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      completedWorkout: {}
+      completedWorkout: {
+        date: "",
+        exercises: {
+
+        }
+      }
     };
   }
 
   componentDidMount() {
     const { userData } = this.props;
     if (userData) {
-      let updatedWorkout = Object.assign({}, this.state.completedWorkout);
+      let updatedWorkout = Object.assign({}, this.state.completedWorkout.exercises);
       const setObj = {
         weight: "",
         reps: ""
@@ -29,19 +34,22 @@ class ExerciseView extends Component {
         }
       });
       this.setState({
-        completedWorkout: updatedWorkout
-      });
+        completedWorkout: {
+          exercises: updatedWorkout
+      }})
     }
   }
 
   exerciseUpdate = (e, exerciseName, index) => {
-    let updatedWorkout = JSON.stringify(this.state.completedWorkout);
+    let updatedWorkout = JSON.stringify(this.state.completedWorkout.exercises);
     let updatedWorkoutParsed = JSON.parse(updatedWorkout);
 
     updatedWorkoutParsed[exerciseName][index][e.target.id] = e.target.value;
 
-    this.setState({ 
-      completedWorkout: updatedWorkoutParsed
+    this.setState({
+      completedWorkout: {
+        exercises: updatedWorkoutParsed
+      }
     });
   };
 
