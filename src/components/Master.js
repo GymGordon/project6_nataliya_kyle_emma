@@ -7,7 +7,7 @@ import Workouts from "./Workouts";
 import WorkoutView from "./WorkoutView";
 import ExerciseView from "./ExerciseView";
 import Notes from "./Notes";
-import Logs from "./Logs";
+import History from "./History";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -271,16 +271,6 @@ class Master extends Component {
     );
   };
 
-
-
-  // SAVE NOTES
-
-  saveNotes = e => {
-    e.preventDefault();
-    console.log("this works toosavenotes");
-    this.props.history.push(`/logs`);
-  };
-
   render() {
     const {
       userData,
@@ -382,12 +372,17 @@ class Master extends Component {
           path="/notes/:routineKey/:workoutKey/:completedWorkoutKey"
           render={() => 
           <Notes 
-            saveNotes={this.saveNotes} 
             goBack={this.goBack}
             userData={userData}
+            uid={this.state.user.uid}
             />}
         />
-        <Route path="/logs" render={() => <Logs />} />
+        <Route path="/history/:completedWorkoutKey" render={() => 
+          <History
+            goBack={this.goBack}
+            userData={userData}
+            uid={this.state.user.uid}
+          />} />
       </Switch>
     );
   }

@@ -69,6 +69,22 @@ width: calc(50% - 20px);
     
 }
 
+
+.btn--save {
+    width: 100%;
+    background: lightsalmon;
+}
+
+
+.historyItem {
+    display: block;
+    width: 100%;
+    border: 1px solid #cccccc;
+    padding: 20px 0;
+    margin-bottom: 10px;
+}
+
+
 .btn--goBack {
     border: none;
     margin-top: 25px;

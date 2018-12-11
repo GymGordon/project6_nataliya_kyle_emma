@@ -96,8 +96,6 @@ class ExerciseView extends Component {
       this.exerciseArray = Object.entries(
         userData.routines[routineKey].workouts[workoutKey].exercises
       );
-      const remove = () => this.exerciseArray.pop();
-      remove();
 
       this.printExerciseViewForms = (sets, reps, name) => {
         this.exerciseViewForms = [];
@@ -136,19 +134,17 @@ class ExerciseView extends Component {
       };
     }
 
-    return (
-      <section className="exerciseView">
+    return <section className="exerciseView">
         <form action="" onSubmit={this.finishWorkout}>
           {userData && this.exerciseMap()}
 
-          <input className="btn--goTo" type="submit" value="Finish Workout" />
+          <input className="btn--save" type="submit" value="Finish Workout" />
         </form>
         <button className="btn--goBack" onClick={goBack}>
           <i class="fas fa-long-arrow-alt-left" />
           Go Back
         </button>
-      </section>
-    );
+      </section>;
   }
 }
 
