@@ -11,8 +11,6 @@ class Dashboard extends Component {
     return <section className="dashboard">
       
         {userData && <div>
-            {/* <h2>Routines</h2> */}
-
             <form action="" onSubmit={addRoutine} className="test">
               <div className="userInputContainer clearfix">
                 <label className="visuallyhidden" htmlFor="routineName">
@@ -26,9 +24,11 @@ class Dashboard extends Component {
                 </button>
               </div>
             </form>
-            {/* {userData.routines || {}} */}
             <div className="wrapper clearfix">
-            {Object.entries(userData.routines).map(user => 
+            {
+              userData.routines && 
+
+              Object.entries(userData.routines).map(user => 
                 <button className="emma btn--goTo" key={user[0]} id={user[0]} onClick={goToRoutine}>
                   <div className="goTo clearfix">
                     {user[1].routineName}

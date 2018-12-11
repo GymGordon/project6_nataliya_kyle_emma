@@ -379,7 +379,7 @@ class Master extends Component {
         />
 
         <Route
-          path="/notes/:routineKey/:workoutKey"
+          path="/notes/:routineKey/:workoutKey/:completedWorkoutKey"
           render={() => 
           <Notes 
             saveNotes={this.saveNotes} 

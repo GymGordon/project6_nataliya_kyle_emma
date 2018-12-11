@@ -9,10 +9,10 @@ class ExerciseView extends Component {
     super(props);
     this.state = {
       completedWorkout: {
+        routineName: "",
+        workoutName: "",
         date: "",
-        exercises: {
-
-        }
+        exercises: {}
       }
     };
   }
@@ -20,7 +20,10 @@ class ExerciseView extends Component {
   componentDidMount() {
     const { userData } = this.props;
     if (userData) {
-      let updatedWorkout = Object.assign({}, this.state.completedWorkout.exercises);
+      let updatedWorkout = Object.assign(
+        {},
+        this.state.completedWorkout.exercises
+      );
       const setObj = {
         weight: "",
         reps: ""
@@ -36,7 +39,8 @@ class ExerciseView extends Component {
       this.setState({
         completedWorkout: {
           exercises: updatedWorkout
-      }})
+        }
+      });
     }
   }
 
@@ -56,23 +60,30 @@ class ExerciseView extends Component {
   // FINISH WORKOUT
 
   finishWorkout = e => {
+    const { userData } = this.props;
     const routineKey = this.props.match.params.routineKey;
     const workoutKey = this.props.match.params.workoutKey;
     e.preventDefault();
-    this.setState({
-      completedWorkout: {
-        ...this.state.completedWorkout,
-        date: date
+    this.setState(
+      {
+        completedWorkout: {
+          ...this.state.completedWorkout,
+          date: date,
+          routineName: userData.routines[routineKey].routineName,
+          workoutName:
+            userData.routines[routineKey].workouts[workoutKey].workoutName
+        }
+      },
+      () => {
+        const completedWorkoutKey = firebase
+          .database()
+          .ref(`/users/${this.props.uid}/completedWorkouts/`)
+          .push(this.state.completedWorkout).key;
+
+        // re-direct
+        this.props.history.push(`/notes/${routineKey}/${workoutKey}/${completedWorkoutKey}`);
       }
-    }, () => {
-      firebase
-        .database()
-        .ref(`/users/${this.props.uid}/completedWorkouts/routines/${routineKey}/workouts/${workoutKey}`)
-        .update(this.state.completedWorkout);
-    });
-    // re-direct
-    this.props.history.push(`/notes/${routineKey}/${workoutKey}`);
-    
+    );
   };
 
   render() {
@@ -82,7 +93,9 @@ class ExerciseView extends Component {
       const routineKey = this.props.match.params.routineKey;
       const workoutKey = this.props.match.params.workoutKey;
 
-      this.exerciseArray = Object.entries(userData.routines[routineKey].workouts[workoutKey].exercises);
+      this.exerciseArray = Object.entries(
+        userData.routines[routineKey].workouts[workoutKey].exercises
+      );
       const remove = () => this.exerciseArray.pop();
       remove();
 
@@ -140,27 +153,3 @@ class ExerciseView extends Component {
 }
 
 export default withRouter(ExerciseView);
-
-// completedWorkout: {
-//   date: "",
-//     BACKTHING: [
-//       {
-//         weight: "",
-//         reps: ""
-//       },
-//       {
-//         weight: "",
-//         reps: ""
-//       }
-//     ],
-//       LUNGE: [
-//         {
-//           weight: "",
-//           reps: ""
-//         },
-//         {
-//           weight: "",
-//           reps: ""
-//         }
-//       ],
-//       }

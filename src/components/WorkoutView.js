@@ -17,8 +17,6 @@ class WorkoutView extends Component {
       const routineKey = this.props.match.params.routineKey
   
       this.workoutArray = Object.entries(userData.routines[routineKey].workouts);
-      const remove = () => this.workoutArray.pop();
-      remove();
     }
 
 
