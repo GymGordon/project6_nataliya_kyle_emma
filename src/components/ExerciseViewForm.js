@@ -7,28 +7,44 @@ class ExerciseViewForm extends Component {
   render() {
     const {
       exerciseReps,
-      handleChange,
+      exerciseUpdate,
       exerciseName,
       handleChecked,
       index
     } = this.props;
 
-    return <fieldset className="clearfix">
+    return (
+      <fieldset className="clearfix">
         <label className="visuallyhidden" htmlFor="weight">
           Weight
         </label>
-        <input type="text" id={`${exerciseName}Weight${index}`} placeholder="lbs" onChange={handleChange} />
+        <input
+          type="text"
+          id="weight"
+          placeholder="lbs"
+          onChange={e => exerciseUpdate(e, exerciseName, index)}
+        />
 
         <label className="visuallyhidden" htmlFor="reps">
           Reps
         </label>
-        <input type="text" id={`${exerciseName}Reps${index}`} placeholder={exerciseReps} onChange={handleChange} />
+        <input
+          type="text"
+          id="reps"
+          placeholder={exerciseReps}
+          onChange={e => exerciseUpdate(e, exerciseName, index)}
+        />
 
         <label className="visuallyhidden" htmlFor="completed">
           Done
         </label>
-        <input type="checkbox" id={`${exerciseName}Completed${index}`} onClick={handleChecked} />
-      </fieldset>;
+        <input
+          type="checkbox"
+          id={`${exerciseName}Completed${index}`}
+          onClick={handleChecked}
+        />
+      </fieldset>
+    );
   }
 }
 

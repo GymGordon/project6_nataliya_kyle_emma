@@ -10,41 +10,31 @@ class WorkoutView extends Component {
     const {
       goBack,
       userData,
-      routineKeyForWorkoutView,
       viewExercises
     } = this.props;
 
     if (userData){
       const routineKey = this.props.match.params.routineKey
   
-      this.workoutArray = Object.entries(userData[routineKey]);
-      const remove = () => this.workoutArray.pop();
-      remove();
+      this.workoutArray = Object.entries(userData.routines[routineKey].workouts);
     }
 
-    // userData && ()
 
     return (
       <section className="workoutView">
         {this.props.userData && (
           <div>
             {this.workoutArray.map(workout => {
-              return (
-                <div>
-                  <button
-                  className="btn--goTo"
-                    key={workout[0]}
-                    id={workout[0]}
-                    onClick={viewExercises}
-                  >
+              return <div>
+                  <button className="btn--goTo" key={workout[0]} id={workout[0]} onClick={viewExercises}>
                     {workout[1].workoutName}
+                    <i class="fas fa-angle-right" />
                   </button>
-                </div>
-              );
+                </div>;
             })}
           </div>
         )}
-        <button onClick={goBack}>Go Back</button>
+        <button className="btn--goBack" onClick={goBack}><i class="fas fa-long-arrow-alt-left"></i>Go Back</button>
       </section>
     );
   }

@@ -6,26 +6,38 @@ class Dashboard extends Component {
   }
 
   render() {
-
     const { userData, goToRoutine, handleChange, addRoutine } = this.props;
 
     return <section className="dashboard">
+      
         {userData && <div>
-            <h2>Routines</h2>
-            <form action="" onSubmit={addRoutine}>
-              <label className="visuallyhidden" htmlFor="routineName">
-                Routine Name
-              </label>
-              <div className="inputDiv clearfix">
-                <input required onChange={handleChange} type="text" name="routineName" id="routineName" placeholder="Routine Name" />
-                <input className="btn--add" type="submit" value=">" />
+            <form action="" onSubmit={addRoutine} className="test">
+              <div className="userInputContainer clearfix">
+                <label className="visuallyhidden" htmlFor="routineName">
+                  Routine Name
+                </label>
+                {/* "Enter routine name" */}
+                <input required onChange={handleChange} type="text" name="routineName" id="routineName" placeholder="Enter routine name" />
+                {/* Button: Add */}
+                <button className="btn--add" type="submit">
+                  <i class="fas fa-plus"></i>
+                </button>
               </div>
             </form>
-            {Object.entries(userData).map(user => <div>
-                <button className="btn--goTo" key={user[0]} id={user[0]} onClick={goToRoutine}>
-                  {user[1].routineName}
+            <div className="wrapper clearfix">
+            {
+              userData.routines && 
+
+              Object.entries(userData.routines).map(user => 
+                <button className="emma btn--goTo" key={user[0]} id={user[0]} onClick={goToRoutine}>
+                  <div className="goTo clearfix">
+                    {user[1].routineName}
+                    <i class="fas fa-angle-right" />
+                  </div>
                 </button>
-              </div>)}
+              )
+            }
+        </div>
           </div>}
       </section>;
   }

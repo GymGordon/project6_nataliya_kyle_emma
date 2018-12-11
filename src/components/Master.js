@@ -6,8 +6,9 @@ import AddExercises from "./AddExercises";
 import Workouts from "./Workouts";
 import WorkoutView from "./WorkoutView";
 import ExerciseView from "./ExerciseView";
-import Notes from "./Notes";
-import Logs from "./Logs";
+import AddNotes from "./AddNotes";
+import NotesView from "./NotesView";
+import History from "./History";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -41,7 +42,7 @@ class Master extends Component {
           },
           () => {
             // create reference specific to user
-            this.dbRef = firebase.database().ref(`/${this.state.user.uid}`);
+            this.dbRef = firebase.database().ref(`/users/${this.state.user.uid}`);
             this.dbRef.on("value", snapshot => {
               this.setState({
                 userData: snapshot.val() || {}
@@ -102,8 +103,11 @@ class Master extends Component {
     };
 
     // ROUTINE KEY + PUSH TO FB (uid/routine/)
-    const routineKey = this.dbRef.push(newRoutine).key;
-
+    const routineKey = firebase
+      .database()
+      .ref(`/users/${this.state.user.uid}/routines/`)
+      .push(newRoutine).key;
+    
     this.setState({
       routineKey
     });
@@ -135,7 +139,7 @@ class Master extends Component {
     // WORKOUT KEY + PUSH TO FB (uid/routine/workout)
     const workoutKey = firebase
       .database()
-      .ref(`/${this.state.user.uid}/${this.state.routineKey}`)
+      .ref(`/users/${this.state.user.uid}/routines/${this.state.routineKey}/workouts`)
       .push(newWorkout).key;
 
     const updatedWorkoutKeys = Array.from(this.state.workoutKeys);
@@ -195,11 +199,7 @@ class Master extends Component {
       const exerciseKey = firebase
         .database()
         .ref(
-          `/${this.state.user.uid}/${this.state.routineKey}/${
-            this.state.workoutKey
-          }`
-        )
-        .push(exercise).key;
+          `/users/${this.state.user.uid}/routines/${this.state.routineKey}/workouts/${this.state.workoutKey}/exercises`).push(exercise).key;
       // pushing each exercise object into cloned exerciseKey array
       updatedExerciseKeys.push({ [exercise.exerciseName]: exerciseKey });
     });
@@ -214,11 +214,7 @@ class Master extends Component {
     const lastExerciseKey = firebase
       .database()
       .ref(
-        `/${this.state.user.uid}/${this.state.routineKey}/${
-          this.state.workoutKey
-        }`
-      )
-      .push(newExercise).key;
+        `/users/${this.state.user.uid}/routines/${this.state.routineKey}/workouts/${this.state.workoutKey}/exercises`).push(newExercise).key;
     // pushing last key into cloned exerciseKeys array
     updatedExerciseKeys.push({ [this.state.exerciseName]: lastExerciseKey });
 
@@ -274,24 +270,6 @@ class Master extends Component {
         this.state.routineKeyForWorkoutView
       }/${workoutKeyForExerciseView}`
     );
-  };
-
-  // FINISH WORKOUT
-
-  finishWorkout = e => {
-    e.preventDefault();
-    this.props.history.push(`/notes`);
-    {
-      console.log("works");
-    }
-  };
-
-  // SAVE NOTES
-
-  saveNotes = e => {
-    e.preventDefault();
-    console.log("this works toosavenotes");
-    this.props.history.push(`/logs`);
   };
 
   render() {
@@ -386,15 +364,32 @@ class Master extends Component {
               handleChange={this.handleChange}
               finishWorkout={this.finishWorkout}
               goBack={this.goBack}
+              uid={this.state.user.uid}
             />
           )}
         />
 
         <Route
-          path="/notes"
-          render={() => <Notes saveNotes={this.saveNotes} />}
+          path="/addnotes/:routineKey/:workoutKey/:completedWorkoutKey"
+          render={() => 
+          <AddNotes 
+            goBack={this.goBack}
+            userData={userData}
+            uid={this.state.user.uid}
+            />}
         />
-        <Route path="/logs" render={() => <Logs />} />
+        <Route path="/history/:completedWorkoutKey" render={() => 
+          <History
+            goBack={this.goBack}
+            userData={userData}
+            uid={this.state.user.uid}
+          />} />
+        <Route path="/notesview/:workoutKey" render={() =>
+          <NotesView
+            goBack={this.goBack}
+            userData={userData}
+            uid={this.state.user.uid}
+          />} />
       </Switch>
     );
   }

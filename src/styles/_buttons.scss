@@ -1,24 +1,102 @@
+button {
+  background: none;
+  border: none;
+}
 
 .btn--add {
-  margin: 10px auto;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #a4e000;
-  color: black;
-}
-
-.btn--goTo {
-  background: white;
-  padding: 20px 20px;
-  border: none;
-  border-radius: 3px;
-  width: 100%;
-  margin: 5px 0;
-  // color: white;
-  text-align: left;
-  &:hover {
-    background: #8ce8ff;
-    // color: white;
+  margin-left: 10px;
+  padding-top: 12px;
+  display: block;
+  .fa-plus {
+    margin-left: 15px;
+    font-size: 3rem;
+    padding: 7px 0;
+    color: #006882;
+    color: #64d38e;
   }
 }
+
+// BUTTON &: go to routine, go to workout
+
+.btn--goTo {
+  width: calc(50% - 20px);
+  float: left;
+  margin: 8px 10px;
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: left;
+  height: 90px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background: rgba(63, 255, 140, 0.4);
+      background: rgba(0, 104, 130, 0.2);
+
+  }
+  &:hover .fa-angle-right {
+    color: #3b3b3b;
+  }
+  .fa-angle-right {
+    float: right;
+    margin-left: 10px;
+    font-size: 2.5rem;
+    color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 101, 127, 0.2);
+  }
+}
+
+@media (max-width: 600px) {
+  .btn--goTo {
+    //   border: 1px solid red;
+    padding: 20px;
+    border-radius: 4px;
+    width: 100%;
+    float: none;
+    margin: 8px 0;
+    height: 90px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    &:hover {
+      background: rgba(63, 255, 140, 0.4);
+    }
+    &:hover .fa-angle-right {
+      color: #3b3b3b;
+    }
+    .fa-angle-right {
+      float: right;
+      margin-left: 10px;
+      font-size: 2.5rem;
+      color: rgba(0, 0, 0, 0.1);
+      color: rgba(0, 101, 127, 0.2);
+    }
+  }
+}
+
+.btn--save {
+  width: 100%;
+  background: rgb(255, 224, 138);
+}
+
+.historyItem {
+  display: block;
+  width: 100%;
+  border: 1px solid #cccccc;
+  padding: 20px 0;
+  margin-bottom: 10px;
+}
+
+.btn--goBack {
+  border: none;
+  margin-top: 25px;
+  .fa-long-arrow-alt-left {
+    margin-top: 5px;
+    margin-right: 15px;
+  }
+}
+
+
+
+
+// keep box shadow vibes for inputs
+// MELISSA
+// #56a3b3
+// #f17753
