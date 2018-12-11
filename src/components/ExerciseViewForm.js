@@ -20,11 +20,9 @@ class ExerciseViewForm extends Component {
         </label>
         <input
           type="text"
-          // id={`${exerciseName}Weight${index}`}
           id="weight"
           placeholder="lbs"
           onChange={e => exerciseUpdate(e, exerciseName, index)}
-          // data-type="weight"
         />
 
         <label className="visuallyhidden" htmlFor="reps">
@@ -32,11 +30,9 @@ class ExerciseViewForm extends Component {
         </label>
         <input
           type="text"
-          // id={`${exerciseName}Reps${index}`}
           id="reps"
           placeholder={exerciseReps}
           onChange={e => exerciseUpdate(e, exerciseName, index)}
-          // data-type="reps"
         />
 
         <label className="visuallyhidden" htmlFor="completed">

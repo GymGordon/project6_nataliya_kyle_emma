@@ -41,7 +41,7 @@ class Master extends Component {
           },
           () => {
             // create reference specific to user
-            this.dbRef = firebase.database().ref(`/${this.state.user.uid}`);
+            this.dbRef = firebase.database().ref(`/users/${this.state.user.uid}`);
             this.dbRef.on("value", snapshot => {
               this.setState({
                 userData: snapshot.val() || {}
@@ -102,8 +102,11 @@ class Master extends Component {
     };
 
     // ROUTINE KEY + PUSH TO FB (uid/routine/)
-    const routineKey = this.dbRef.push(newRoutine).key;
-
+    const routineKey = firebase
+      .database()
+      .ref(`/users/${this.state.user.uid}/routines/`)
+      .push(newRoutine).key;
+    
     this.setState({
       routineKey
     });
@@ -135,7 +138,7 @@ class Master extends Component {
     // WORKOUT KEY + PUSH TO FB (uid/routine/workout)
     const workoutKey = firebase
       .database()
-      .ref(`/${this.state.user.uid}/${this.state.routineKey}`)
+      .ref(`/users/${this.state.user.uid}/routines/${this.state.routineKey}/workouts`)
       .push(newWorkout).key;
 
     const updatedWorkoutKeys = Array.from(this.state.workoutKeys);
@@ -195,11 +198,7 @@ class Master extends Component {
       const exerciseKey = firebase
         .database()
         .ref(
-          `/${this.state.user.uid}/${this.state.routineKey}/${
-            this.state.workoutKey
-          }`
-        )
-        .push(exercise).key;
+          `/users/${this.state.user.uid}/routines/${this.state.routineKey}/workouts/${this.state.workoutKey}/exercises`).push(exercise).key;
       // pushing each exercise object into cloned exerciseKey array
       updatedExerciseKeys.push({ [exercise.exerciseName]: exerciseKey });
     });
@@ -214,11 +213,7 @@ class Master extends Component {
     const lastExerciseKey = firebase
       .database()
       .ref(
-        `/${this.state.user.uid}/${this.state.routineKey}/${
-          this.state.workoutKey
-        }`
-      )
-      .push(newExercise).key;
+        `/users/${this.state.user.uid}/routines/${this.state.routineKey}/workouts/${this.state.workoutKey}/exercises`).push(newExercise).key;
     // pushing last key into cloned exerciseKeys array
     updatedExerciseKeys.push({ [this.state.exerciseName]: lastExerciseKey });
 

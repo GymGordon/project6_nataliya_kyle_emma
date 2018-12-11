@@ -9,6 +9,7 @@ class Dashboard extends Component {
     const { userData, goToRoutine, handleChange, addRoutine } = this.props;
 
     return <section className="dashboard">
+      
         {userData && <div>
             {/* <h2>Routines</h2> */}
 
@@ -25,8 +26,9 @@ class Dashboard extends Component {
                 </button>
               </div>
             </form>
-
-            {Object.entries(userData).map(user => <div>
+            {/* {userData.routines || {}} */}
+            {Object.entries(userData.routines).map(user => 
+            <div>
                 <button className="btn--goTo" key={user[0]} id={user[0]} onClick={goToRoutine}>
                   <div className="goTo clearfix">
                     {user[1].routineName}

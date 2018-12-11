@@ -10,19 +10,17 @@ class WorkoutView extends Component {
     const {
       goBack,
       userData,
-      routineKeyForWorkoutView,
       viewExercises
     } = this.props;
 
     if (userData){
       const routineKey = this.props.match.params.routineKey
   
-      this.workoutArray = Object.entries(userData[routineKey]);
+      this.workoutArray = Object.entries(userData.routines[routineKey].workouts);
       const remove = () => this.workoutArray.pop();
       remove();
     }
 
-    // userData && ()
 
     return (
       <section className="workoutView">

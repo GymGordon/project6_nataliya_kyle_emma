@@ -57,11 +57,13 @@ class ExerciseView extends Component {
         ...this.state.completedWorkout,
         date: date
       }
+    }, () => {
+      firebase
+        .database()
+        .ref(`/users/${this.props.uid}/completedWorkouts/routines/${routineKey}/workouts/${workoutKey}`)
+        .update(this.state.completedWorkout);
     });
-    firebase
-      .database()
-      .ref(`/${this.props.uid}/${routineKey}/${workoutKey}/completedWorkouts`)
-      .update(this.state.completedWorkout);
+    
   };
 
   render() {
@@ -71,7 +73,7 @@ class ExerciseView extends Component {
       const routineKey = this.props.match.params.routineKey;
       const workoutKey = this.props.match.params.workoutKey;
 
-      this.exerciseArray = Object.entries(userData[routineKey][workoutKey]);
+      this.exerciseArray = Object.entries(userData.routines[routineKey].workouts[workoutKey].exercises);
       const remove = () => this.exerciseArray.pop();
       remove();
 
@@ -82,6 +84,7 @@ class ExerciseView extends Component {
             <ExerciseViewForm
               exerciseName={name}
               exerciseUpdate={this.exerciseUpdate}
+              exerciseReps={reps}
               index={i}
             />
           );
