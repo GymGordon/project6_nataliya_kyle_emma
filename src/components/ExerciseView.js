@@ -89,6 +89,7 @@ class ExerciseView extends Component {
   };
 
   render() {
+    
     const { userData, goBack } = this.props;
 
     if (userData) {
@@ -139,15 +140,16 @@ class ExerciseView extends Component {
     return (
       <section className="exerciseView">
         <div className="wrapper">
+          <button className="btn--goBack" onClick={goBack}>
+            <i class="fas fa-long-arrow-alt-left" />
+            Go Back
+          </button>
           <form action="" onSubmit={this.finishWorkout}>
             {userData && this.exerciseMap()}
 
             <input className="btn--save" type="submit" value="Finish Workout" />
           </form>
-          <button className="btn--goBack" onClick={goBack}>
-            <i class="fas fa-long-arrow-alt-left" />
-            Go Back
-          </button>
+          
         </div>
       </section>
     );

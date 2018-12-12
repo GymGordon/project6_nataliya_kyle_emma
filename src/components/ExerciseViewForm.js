@@ -5,26 +5,33 @@ class ExerciseViewForm extends Component {
     super(props);
   }
   render() {
-    const {
-      exerciseReps,
-      exerciseUpdate,
-      exerciseName,
-      handleChecked,
-      index
-    } = this.props;
+    const { exerciseReps, exerciseUpdate, exerciseName, index } = this.props;
 
-    return <fieldset className="clearfix">
+    return (
+      <fieldset className="clearfix">
+        <h3>Set{index + 1}</h3>
         <div className="exerciseDetails clearfix">
           <label className="visuallyhidden" htmlFor="weight">
             Weight
           </label>
-          <input type="text" id="weight" placeholder="weight (lbs)" onChange={e => exerciseUpdate(e, exerciseName, index)} />
+          <input
+            type="text"
+            id="weight"
+            placeholder="weight (lbs)"
+            onChange={e => exerciseUpdate(e, exerciseName, index)}
+          />
           <label className="visuallyhidden" htmlFor="reps">
             Reps
           </label>
-          <input type="text" id="reps" placeholder={`reps (${exerciseReps})`} onChange={e => exerciseUpdate(e, exerciseName, index)} />
+          <input
+            type="text"
+            id="reps"
+            placeholder={`reps (${exerciseReps})`}
+            onChange={e => exerciseUpdate(e, exerciseName, index)}
+          />
         </div>
-      </fieldset>;
+      </fieldset>
+    );
   }
 }
 

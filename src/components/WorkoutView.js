@@ -7,31 +7,32 @@ class WorkoutView extends Component {
   }
 
   render() {
-    const {
-      goBack,
-      userData,
-      viewExercises
-    } = this.props;
+    const { goBack, userData, viewExercises } = this.props;
 
-    if (userData){
-      const routineKey = this.props.match.params.routineKey
-  
-      this.workoutArray = Object.entries(userData.routines[routineKey].workouts);
+    if (userData) {
+      const routineKey = this.props.match.params.routineKey;
+
+      this.workoutArray = Object.entries(
+        userData.routines[routineKey].workouts
+      );
     }
 
-
     return <section className="workoutView">
-        {this.props.userData && <div className="wrapper clearfix">
-            {this.workoutArray.map(workout => {
-              return <button className="btn--goTo" key={workout[0]} id={workout[0]} onClick={viewExercises}>
-                  {workout[1].workoutName}
-                  <i class="fas fa-angle-right" />
-                </button>;
-            })}
-            <button className="btn--goBack" onClick={goBack}>
-              <i class="fas fa-long-arrow-alt-left" />Go Back
-            </button>
-          </div>}
+        <div className="wrapper">
+          <button className="btn--goBack" onClick={goBack}>
+            <i class="fas fa-long-arrow-alt-left" />
+            Go Back
+          </button>
+
+          {this.props.userData && <div className="wrapper clearfix">
+              {this.workoutArray.map(workout => {
+                return <button className="btn--goTo" key={workout[0]} id={workout[0]} onClick={viewExercises}>
+                    {workout[1].workoutName}
+                    <i class="fas fa-angle-right" />
+                  </button>;
+              })}
+            </div>}
+        </div>
       </section>;
   }
 }

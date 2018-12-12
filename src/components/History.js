@@ -8,7 +8,7 @@ class History extends Component {
   render() {
     const { goHome, userData} = this.props;
 
-    return <section className="logs">
+    return <section className="history">
         <div className="wrapper">
           <h2>Workout History</h2>
 

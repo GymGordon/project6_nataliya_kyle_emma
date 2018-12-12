@@ -350,6 +350,7 @@ class Master extends Component {
               saveWorkout={this.saveWorkout}
               addExercise={this.addExercise}
               exerciseCounter={exerciseCounter}
+              routineName={routineName}
               workoutName={workoutName}
               goBack={this.goBack}
             />

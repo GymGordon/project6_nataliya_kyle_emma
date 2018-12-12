@@ -23,7 +23,7 @@ h1 {
     font-size: 2.8rem;
     padding: 2vh 20px 1vh 20px;
     letter-spacing: 0px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 // EXERCISE NAME
@@ -32,21 +32,40 @@ h2 {
     margin-bottom: 10px;
     text-transform: uppercase;
     color: $darkColor;
-    font-weight: 400;
 }
-//h2
-.savedRoutines {
+
+//h2 
+.tagline {
+    font-size: 2.2rem;
+}
+
+//h2 "Saved Routines", "Saved Workouts" on Dashboard/Workouts
+.saved {
+    text-align: center;
+    font-weight: 600;
+    padding-top: 20px;
+    border-top: 1px solid $lightBlack;
+}
+
+@media (max-width: 600px) {
     text-align: left;
     padding: 25px 0 0 20px;
 }
 
-
 // WEIGHT/REPS/SETS
 h3 {
-    font-size: 1.6rem;
-    font-weight: 400;
+    font-size: 1.8rem;
 }
 
 ::placeholder {
     color: #777777;
+}
+
+.date {
+    color: $mainColor;
+    margin-bottom: 10px;
+}
+
+.bold {
+    font-weight: 700;
 }

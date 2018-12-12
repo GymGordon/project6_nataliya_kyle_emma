@@ -16,15 +16,13 @@ class HistoryItem extends Component {
   render() {
     const { workout, workoutKey } = this.props;
 
-    return (
-      <button id={workoutKey} onClick={this.viewNotes} className="historyItem">
-        <p>{workout.date}</p>
-        <p>{workout.routineName}</p>
-        <p>{workout.workoutName}</p>
-        <p>{workout.notes}</p>
+    return <button className="btn--goTo" id={workoutKey} onClick={this.viewNotes}>
+        <h3 className="date">{workout.date}</h3>
+        <h2>
+          {workout.routineName} -- {workout.workoutName}
+        </h2>
         <i class="fas fa-angle-right" />
-      </button>
-    );
+      </button>;
   }
 }
 
