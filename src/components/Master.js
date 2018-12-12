@@ -81,6 +81,14 @@ class Master extends Component {
     });
   };
 
+  updateKey(key, value) {
+  // update react state
+  this.setState({ [key]: value });
+
+  // update localStorage
+  localStorage.setItem(key, value);
+}
+
   // CONTROLLED INPUTS
 
   handleChange = e => {
@@ -271,6 +279,10 @@ class Master extends Component {
     this.setState({
       routineKey
     });
+
+    this.updateKey("routineKey", routineKey)
+    this.updateKey("uid", this.state.user.uid)
+    
     this.props.history.push(`/workoutview/${routineKey}`);
   };
 
@@ -278,9 +290,21 @@ class Master extends Component {
 
   viewExercises = e => {
     const workoutKey = e.target.id;
+
+    let storedRoutineKey = localStorage.getItem('routineKey');
+    this.state = {
+      routineKey: storedRoutineKey
+    };
+
+
+
     this.setState({
       workoutKey
     });
+
+
+
+
     //direct user to exerciseview component
     this.props.history.push(
       `/exerciseview/${this.state.routineKey}/${workoutKey}`
@@ -374,7 +398,7 @@ class Master extends Component {
               handleChange={this.handleChange}
               finishWorkout={this.finishWorkout}
               goBack={this.goBack}
-              uid={this.state.user.uid}
+              uid={this.state.uid}
             />
           )}
         />
@@ -394,7 +418,7 @@ class Master extends Component {
             <History
               goBack={this.goBack}
               userData={userData}
-              uid={this.state.user.uid}
+              uid={this.state.uid}
             />
           )}
         />
@@ -404,7 +428,7 @@ class Master extends Component {
             <NotesView
               goBack={this.goBack}
               userData={userData}
-              uid={this.state.user.uid}
+              uid={this.state.uid}
             />
           )}
         />
@@ -412,14 +436,14 @@ class Master extends Component {
           <History
             goHome={this.goHome}
             userData={userData}
-            uid={this.state.user.uid}
+            uid={this.state.uid}
           />} />
         <Route path="/notesview/:workoutKey" render={() =>
           <NotesView
             goBack={this.goBack}
             userData={userData}
-            uid={this.state.user.uid}
-          />} />
+            uid={this.state.uid}
+          />} />  
       </Switch>
     );
   }
