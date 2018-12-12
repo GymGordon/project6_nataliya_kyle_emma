@@ -34,7 +34,7 @@ button {
   .btn--add, .btn--save {
     width: 100%;
     margin-top: 10px;
-    border-radius: 4px;
+    border-radius: none;
     transition: background-color .25s ease;
   }
   .btn--add {
@@ -66,7 +66,7 @@ button {
   padding: 40px 40px;
   border-radius: 4px;
   text-align: left;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+  // box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
   transition: width 0.35s ease;
   &:hover {
     background-color: $accentColor;

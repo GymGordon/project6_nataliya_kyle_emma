@@ -17,7 +17,7 @@ class Dashboard extends Component {
                   Routine Name
                 </label>
                 {/* "Enter routine name" */}
-                <input required onChange={handleChange} type="text" name="routineName" id="routineName" placeholder="Enter routine name" />
+                <input required onChange={handleChange} type="text" name="routineName" id="routineName" placeholder="Enter routine name, i.e. 'Bulking Season'" />
                 {/* Button: PLUS */}
                 <button className="btn--add" type="submit">
                   Add Routine
