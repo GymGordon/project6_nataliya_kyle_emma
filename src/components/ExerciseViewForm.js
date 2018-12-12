@@ -15,6 +15,7 @@ class ExerciseViewForm extends Component {
             Weight
           </label>
           <input
+            required
             type="text"
             id="weight"
             placeholder="weight (lbs)"
@@ -24,6 +25,7 @@ class ExerciseViewForm extends Component {
             Reps
           </label>
           <input
+            required
             type="text"
             id="reps"
             placeholder={`reps (${exerciseReps})`}

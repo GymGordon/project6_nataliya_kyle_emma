@@ -19,8 +19,7 @@ let mm = months[date.getMonth()];
 let yyyy = date.getFullYear();
 let hours = date.getHours();
 let mins = date.getMinutes();
-let time = hours + ":" + mins;
 
-date = mm + " " + dd + ", " + yyyy + " " + time;
+date = mm + " " + dd + ", " + yyyy;
 
 export default date;

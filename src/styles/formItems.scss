@@ -33,7 +33,7 @@ label {
     width: 100%;
     input {
       width: 100%;
-      border-radius: 5px;
+      border-radius: 0 0 0 0;
       border: 1px solid $lightBlack;
     }
   }
@@ -50,29 +50,49 @@ fieldset {
 }
 
 .exerciseInputs {
-  width: 33.33%;
+  width: calc(33.33% - 40px);
   float: left;
+  margin: 0 20px;
+  .addExerciseInput {
+    width: 100%;
+  }
 }
 
-// ADD EXERCISES
-.exerciseLabels {
-  label {
-    float: left;
-    width: 33.33%;
+@media (max-width: 600px) {
+  .exerciseInputs {
+    width: 100%;
+    float: none;
+    margin: 0 0;
+    .addExerciseInput {
+      width: 100%;
+      margin: 0 0 0 0;
+    }
   }
 }
 
 // EXERCISE VIEW
 
 // "sets"
-.exerciseView h3 {
+.exerciseView h3,
+.addNotes h3,
+.notesView h3
+ {
     margin-bottom: 20px;
 }
 
-.exerciseView h2 {
+.exerciseView h2,
+.addNotes h2,
+.notesView h2
+ {
     color: $mainColor;
     font-size: 2.5rem;
-    margin-top: 25px;
+    // margin-top: 25px;
+}
+
+
+.exerciseCard, 
+.btn--goTo {
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .exerciseCard {
@@ -82,7 +102,31 @@ fieldset {
   border-radius: 5px;
   input {
     border: 1px solid rgba(0, 0, 0, 0.2);
-    margin: 0 10px;
+    // margin: 0 10px;
+  }
+}
+
+
+.completedDetails {
+  margin-bottom: 20px;
+  text-align: center;
+  .detail {
+    border: 1px solid $mainColor;
+    padding: 15px 10px;
+    margin: 0 10px 10px 10px;
+    float: left;
+    text-align: center;
+    width: calc(50% - 20px);
+  }
+}
+
+
+@media (max-width: 600px) {
+  .completedDetails {
+    .detail {
+      width: 100%;
+      margin: 0 0px 10px 0px;
+    }
   }
 }
 
@@ -103,4 +147,20 @@ textarea {
     &:hover {
         resize: both;
     }
+}
+
+//NotesView
+.notes {
+  text-align: left;
+  font-style: italic;
+  margin-top: 25px;
+}
+
+.headline {
+  background: lighten($mainColor, 5%);
+  color: white;
+  h2 {
+   color: white;
+   margin: 0 0 10px 0;
+  }
 }

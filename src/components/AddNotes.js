@@ -42,10 +42,11 @@ class AddNotes extends Component {
 
         return (
           <div>
-            <h2>{workoutSummary.routineName}</h2>
-            <h2>{workoutSummary.workoutName}</h2>
+            <div className="exerciseCard headline">
+              <h2>Workout Summary</h2>
 
-            <p>{workoutSummary.date}</p>
+              <p>{workoutSummary.date}</p>
+            </div>
 
             {Object.entries(workoutSummary.exercises).map(exercise => {
               return <CompletedExercise exercise={exercise} />;
@@ -56,21 +57,23 @@ class AddNotes extends Component {
     }
 
     return (
-      <div className="wrapper">
-        <h2>Workout Notes</h2>
-        <textarea rows="5" cols="25"
+      <section className="addNotes">
+        <div className="wrapper">
+          <h2>Workout Notes</h2>
+          <textarea
+            rows="5"
+            cols="25"
             onChange={this.handleChange}
             id="notes"
             placeholder="How was your workout, bruh?"
           />
-        <div className="exerciseCard clearfix">
-          {this.printWorkoutHistory()}
-        </div>
+          <div className="clearfix">{this.printWorkoutHistory()}</div>
 
-        <form action="" onSubmit={this.saveNotes}>
-          <input type="submit" className="btn--save" value="Okay" />
-        </form>
-      </div>
+          <form action="" onSubmit={this.saveNotes}>
+            <input type="submit" className="btn--save" value="Okay" />
+          </form>
+        </div>
+      </section>
     );
   }
 }
