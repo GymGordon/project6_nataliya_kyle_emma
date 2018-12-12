@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Sidebar = props => {
   return (
     <div className={`${props.currentState} sideBar`}>
-      <ul className="wrapper">
+      <ul className="ulWrapper">
         <li>
           <Link to="/dashboard" className="link" onClick={props.handleClick}>
             Dashboard

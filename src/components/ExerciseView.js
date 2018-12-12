@@ -57,8 +57,6 @@ class ExerciseView extends Component {
     });
   };
 
-  
-
   // FINISH WORKOUT
 
   finishWorkout = e => {
@@ -83,7 +81,9 @@ class ExerciseView extends Component {
           .push(this.state.completedWorkout).key;
 
         // re-direct
-        this.props.history.push(`/addnotes/${routineKey}/${workoutKey}/${completedWorkoutKey}`);
+        this.props.history.push(
+          `/addnotes/${routineKey}/${workoutKey}/${completedWorkoutKey}`
+        );
       }
     );
   };
@@ -136,19 +136,21 @@ class ExerciseView extends Component {
       };
     }
 
-    return <section className="exerciseView">
-    <div className="wrapper">
-        <form action="" onSubmit={this.finishWorkout}>
-          {userData && this.exerciseMap()}
+    return (
+      <section className="exerciseView">
+        <div className="wrapper">
+          <form action="" onSubmit={this.finishWorkout}>
+            {userData && this.exerciseMap()}
 
-          <input className="btn--save" type="submit" value="Finish Workout" />
-        </form>
-        <button className="btn--goBack" onClick={goBack}>
-          <i class="fas fa-long-arrow-alt-left" />
-          Go Back
-        </button>
+            <input className="btn--save" type="submit" value="Finish Workout" />
+          </form>
+          <button className="btn--goBack" onClick={goBack}>
+            <i class="fas fa-long-arrow-alt-left" />
+            Go Back
+          </button>
         </div>
       </section>
+    );
   }
 }
 

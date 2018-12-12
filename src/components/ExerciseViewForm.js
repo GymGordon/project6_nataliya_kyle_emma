@@ -15,25 +15,26 @@ class ExerciseViewForm extends Component {
 
     return (
       <fieldset className="clearfix">
-        <label className="visuallyhidden" htmlFor="weight">
-          Weight
-        </label>
-        <input
-          type="text"
-          id="weight"
-          placeholder="lbs"
-          onChange={e => exerciseUpdate(e, exerciseName, index)}
-        />
-
-        <label className="visuallyhidden" htmlFor="reps">
-          Reps
-        </label>
-        <input
-          type="text"
-          id="reps"
-          placeholder={exerciseReps}
-          onChange={e => exerciseUpdate(e, exerciseName, index)}
-        />
+        <div className="exerciseDetails">
+          <label className="visuallyhidden" htmlFor="weight">
+            Weight
+          </label>
+          <input
+            type="text"
+            id="weight"
+            placeholder="lbs"
+            onChange={e => exerciseUpdate(e, exerciseName, index)}
+          />
+          <label className="visuallyhidden" htmlFor="reps">
+            Reps
+          </label>
+          <input
+            type="text"
+            id="reps"
+            placeholder={exerciseReps}
+            onChange={e => exerciseUpdate(e, exerciseName, index)}
+          />
+        </div>
 
         {/* <label className="visuallyhidden" htmlFor="completed">
           Done

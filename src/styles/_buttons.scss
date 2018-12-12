@@ -94,9 +94,12 @@ button {
 
 .btn--goBack {
   border: none;
+  margin: 0 auto;
   margin-top: 25px;
+  display: block;
+  clear: both;
   .fa-long-arrow-alt-left {
-    margin-top: 5px;
+    padding-top: 5px;
     margin-right: 15px;
   }
 }

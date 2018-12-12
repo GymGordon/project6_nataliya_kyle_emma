@@ -20,23 +20,19 @@ class WorkoutView extends Component {
     }
 
 
-    return (
-      <section className="workoutView">
-        {this.props.userData && (
-          <div className="wrapper">
+    return <section className="workoutView">
+        {this.props.userData && <div className="wrapper clearfix">
             {this.workoutArray.map(workout => {
-              return <div>
-                  <button className="btn--goTo" key={workout[0]} id={workout[0]} onClick={viewExercises}>
-                    {workout[1].workoutName}
-                    <i class="fas fa-angle-right" />
-                  </button>
-                </div>;
+              return <button className="btn--goTo" key={workout[0]} id={workout[0]} onClick={viewExercises}>
+                  {workout[1].workoutName}
+                  <i class="fas fa-angle-right" />
+                </button>;
             })}
-          </div>
-        )}
-        <button className="btn--goBack" onClick={goBack}><i class="fas fa-long-arrow-alt-left"></i>Go Back</button>
-      </section>
-    );
+            <button className="btn--goBack" onClick={goBack}>
+              <i class="fas fa-long-arrow-alt-left" />Go Back
+            </button>
+          </div>}
+      </section>;
   }
 }
 

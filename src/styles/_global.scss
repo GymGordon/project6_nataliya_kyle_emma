@@ -13,7 +13,6 @@ $lightBlack: #0000001a;
 
 html {
   font-size: 62.5%;
-  overflow: hidden;
 }
 
 .App {
@@ -121,7 +120,10 @@ fieldset {
   fieldset input {
     float: left;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    width: 50%;
+    width: calc(50% - 20px);
+    margin: 0 10px;
+    float: left;
+
   }
 }
 

@@ -21,8 +21,6 @@ class History extends Component {
               );
             }
           )}
-
-          <button onClick={goHome}>Home</button>
         </div>
       </section>;
   }

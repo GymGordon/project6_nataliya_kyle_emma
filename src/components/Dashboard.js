@@ -38,7 +38,7 @@ class Dashboard extends Component {
               {userData.routines &&
                 Object.entries(userData.routines).map(user => (
                   <button
-                    className="emma btn--goTo"
+                    className="btn--goTo"
                     key={user[0]}
                     id={user[0]}
                     onClick={goToRoutine}>
