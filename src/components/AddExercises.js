@@ -11,7 +11,8 @@ class AddExercises extends Component {
       exerciseCounter,
       saveWorkout,
       workoutName,
-      addExercise
+      addExercise,
+      routineName
     } = this.props;
 
     const exerciseForms = [];
@@ -21,20 +22,24 @@ class AddExercises extends Component {
 
     return (
       <section className="addExercises">
-        <h2>{workoutName}</h2>
-        <form onSubmit={saveWorkout}>
-          <div className="exerciseLabels clearfix">
-            <label htmlFor="exerciseName">Exercise</label>
-            <label htmlFor="exerciseSets">Sets</label>
-            <label htmlFor="exerciseReps">Reps</label>
-          </div>
+        <div className="wrapper">
+          <h2>{`${routineName}: ${workoutName}`}</h2>
+          <form onSubmit={saveWorkout}>
+            {/* <div className="exerciseLabels clearfix">
+              <label htmlFor="exerciseName">Exercise</label>
+              <label htmlFor="exerciseSets">Sets</label>
+              <label htmlFor="exerciseReps">Reps</label>
+            </div> */}
 
-          {exerciseForms}
+            {exerciseForms}
 
-          <button onClick={addExercise}>Add Exercise</button>
+            <button className="btn--add" onClick={addExercise}>
+              Add Another Exercise
+            </button>
 
-          <input type="submit" value="Save Workout" />
-        </form>
+            <button type="submit" className="btn--save">Save All to Workout</button>
+          </form>
+        </div>
       </section>
     );
   }

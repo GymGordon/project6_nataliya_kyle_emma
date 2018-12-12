@@ -3,60 +3,82 @@ button {
   border: none;
 }
 
-.add {
-  background: $accentColor;
-  height: 100%;
-  padding: 15px 10px;
-  float: left;
-  border-radius: 0 4px 4px 0;
-  box-shadow: 1px 1px 2px $lightBlack;
-}
+// Save Routine
+// Save Workout
 
-@media (max-width: 600px) {
-  .add {
-    width: 100%;
-    margin-top: 10px;
-    border-radius: 4px;
+.btn--save {
+  background: transparent;
+  color: $mainColor;
+  font-weight: 700;
+  border-bottom: 3px solid $mainColor;
+  margin-bottom: 25px;
+  padding: 10px;
+  &:hover {
+    color: $darkColor;
+    border-bottom: 3px solid $darkColor;
   }
 }
 
-
 .btn--add {
-  margin-left: 10px;
-  padding-top: 12px;
-  display: block;
-  .fa-plus {
-    margin-left: 15px;
-    font-size: 3rem;
-    padding: 2px 0;
-    color: $accentColor;
+  padding: 15px 10px;
+  background: $accentColor;
+  height: 100%;
+  float: left;
+  border-radius: 0 4px 4px 0;
+  box-shadow: 1px 1px 2px $lightBlack;
+  border: 1px solid transparent;
+}
+
+
+@media (max-width: 600px) {
+  .btn--add, .btn--save {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 4px;
+    transition: background-color .25s ease;
+  }
+  .btn--add {
+    &:hover {
+      background: darken($accentColor, 25%);
+      font-weight: 700;
+    }
+  }
+  .btn--save {
+    background: $mainColor;
+    color: $white;
+    padding: 15px 10px;
+    &:hover {
+      border-bottom: 3px solid transparent;
+      background: darken($mainColor, 10%);
+      color: $white;
+    }
+
   }
 }
 
 // BUTTON &: go to routine, go to workout
 
 .btn--goTo {
-  width: calc(50% - 20px);
   float: left;
-  margin: 8px 10px;
   background: white;
-  padding: 40px 20px;
+  width: calc(50% - 20px);
+  margin: 10px;
+  padding: 40px 40px;
   border-radius: 4px;
   text-align: left;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  transition: width .35s ease;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+  transition: width 0.35s ease;
   &:hover {
     background-color: $accentColor;
   }
   &:hover .fa-angle-right {
-    color: #3b3b3b;
+    color: $darkColor;
   }
   .fa-angle-right {
     float: right;
     margin-left: 10px;
     font-size: 2.5rem;
-    color: rgba(0, 0, 0, 0.1);
-    color: rgba(0, 101, 127, 0.2);
+    color: #56a3b3;
   }
 }
 
@@ -65,38 +87,29 @@ button {
     width: 100%;
     margin: 8px 0;
     float: none;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     &:hover .fa-angle-right {
       color: #3b3b3b;
-    }
-    .fa-angle-right {
-      float: right;
-      margin-left: 10px;
-      font-size: 2.5rem;
-      color: rgba(0, 0, 0, 0.1);
-      color: rgba(0, 101, 127, 0.2);
     }
   }
 }
 
-.btn--save {
+.history .btn--goTo {
   width: 100%;
-  background: rgb(255, 224, 138);
-}
+  padding: 20px 40px;
+  h2{
+    display: inline-block;
+  }
 
-.historyItem {
-  display: block;
-  width: 100%;
-  border: 1px solid #cccccc;
-  padding: 20px 0;
-  margin-bottom: 10px;
 }
 
 .btn--goBack {
   border: none;
-  margin-top: 25px;
+  padding-left: 20px;
+  margin: 15px 0;
+  display: block;
+  clear: both;
   .fa-long-arrow-alt-left {
-    margin-top: 5px;
+    padding-top: 5px;
     margin-right: 15px;
   }
 }

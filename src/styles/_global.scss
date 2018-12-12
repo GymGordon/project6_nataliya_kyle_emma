@@ -1,8 +1,9 @@
 $darkColor: #3b3b3b;
 $mainColor: #56a3b3;
-$accentColor: #f8cd1e;
+$accentColor: #fff066;
 $lightBlack: #0000001a;
-
+$black: #000000;
+$white: #ffffff;
 
 // #f17753
 
@@ -20,8 +21,9 @@ html {
 }
 
 body {
-  background: #f5f9fe;
+  background: lighten($darkColor, 70%);
   color: #3b3b3b;
+  font-size: 2rem;
 }
 
 header {
@@ -44,108 +46,8 @@ header {
   }
 }
 
-label {
-  display: block;
-  margin: 10px 0;
-}
-
-//Dashboard
-//Workouts
-  .userInputContainer {
-    display: inline-block;
-    margin: 10px 0 20px 0;
-    height: 100%;
-    input {
-      width: 400px;
-      float: left;
-      font-style: italic;
-      border-left: none;
-      box-shadow: 1px 1px 2px $lightBlack;
-      border-radius: 5px 0 0 5px;
-      &:focus {
-        border: 1px solid $accentColor;
-      }
-    }
-}
-
-@media (max-width: 600px) {
-  .userInputContainer{
-    width: 100%;
-    input {
-      width: 100%;
-      border-radius: 3px;
-      border: 1px solid $lightBlack;
-    }
-  }
-}
-
-input {
-  padding: 15px 10px;
-  text-align: center;
-  border: none;
-}
-
-input[type="submit"] {
-  display: block;
-}
-
-fieldset {
-  border: none;
-  margin-bottom: 25px;
-}
-.exerciseInputs {
-  width: 33.33%;
-  float: left;
-}
-
-// ADD EXERCISES
-.exerciseLabels {
-  label {
-    float: left;
-    width: 33.33%;
-  }
-}
-
-// EXERCISE VIEW
-.exerciseCard {
-  background: white;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  padding: 10px 0;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  h3 {
-    float: left;
-    width: 50%;
-  }
-  fieldset input {
-    float: left;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    width: 50%;
-  }
-}
-
-.not-visible {
-  transform: translateX(-100%);
-}
-
-.visible {
-  transform: translateX(0);
-}
-
-.sideBar {
-  position: absolute;
-  // top: 50.5px;
-  width: 50%;
-  z-index: 1000;
-  height: calc(100vh - 50.5px);
-  background: lightblue;
+.completedDetails {
+  // border: 1px solid red;
+  margin-bottom: 20px;
   text-align: left;
-  transition: transform 0.4s ease-in;
-}
-
-.nav {
-  .burger {
-    display: inline-block;
-  }
-  // float: left;
 }

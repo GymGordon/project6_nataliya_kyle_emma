@@ -14,19 +14,19 @@ class NotesView extends Component {
 
     const workoutInfo = userData.completedWorkouts[workoutKey];
 
-    return (
-      <div className="wrapper">
-        <h3>{workoutInfo.date}</h3>
-        <h2>{workoutInfo.routineName}</h2>
-        <h2>{workoutInfo.workoutName}</h2>
-        <p>{workoutInfo.notes}</p>
+    return <div className="wrapper">
+        <div class="exerciseCard">
+          <h3 className="date">{workoutInfo.date}</h3>
+          <h2>{workoutInfo.routineName}</h2>
+          <h2>{workoutInfo.workoutName}</h2>
+          <p>{workoutInfo.notes}</p>
+        </div>
 
         {Object.entries(workoutInfo.exercises).map(exercise => {
           console.log(exercise);
           return <CompletedExercise exercise={exercise} />;
         })}
-      </div>
-    );
+      </div>;
   }
 }
 

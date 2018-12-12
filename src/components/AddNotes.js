@@ -57,8 +57,8 @@ class AddNotes extends Component {
 
     return (
       <div className="wrapper">
-        <h2>Notes</h2>
-          <textarea
+        <h2>Workout Notes</h2>
+        <textarea rows="5" cols="25"
             onChange={this.handleChange}
             id="notes"
             placeholder="How was your workout, bruh?"
