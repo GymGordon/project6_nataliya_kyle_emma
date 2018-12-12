@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.scss";
 import firebase from "firebase";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import Master from "./components/Master";
 
 class App extends Component {
@@ -9,26 +9,24 @@ class App extends Component {
     // router
     // render master
 
-    return (
-      <Router>
+    return <Router>
         <div className="App">
           <header>
             <div className="wrapper">
-              <h1>FleX Fitness</h1>
+              <Link to="/dashboard">
+                <h1>FleX Fitness</h1>
+              </Link>
             </div>
           </header>
 
           <main>
-            <div className="wrapper">
               <Master history={this.props.history} />
-            </div>
           </main>
           {/* <footer>
             <p>This is a footer</p>
           </footer> */}
         </div>
-      </Router>
-    );
+      </Router>;
   }
 }
 

@@ -23,7 +23,7 @@ class WorkoutView extends Component {
     return (
       <section className="workoutView">
         {this.props.userData && (
-          <div>
+          <div className="wrapper">
             {this.workoutArray.map(workout => {
               return <div>
                   <button className="btn--goTo" key={workout[0]} id={workout[0]} onClick={viewExercises}>
