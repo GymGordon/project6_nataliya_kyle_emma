@@ -6,21 +6,25 @@ class History extends Component {
     super(props);
   }
   render() {
-    const { goBack, userData} = this.props;
+    const { goHome, userData} = this.props;
 
-    return (
-      <section className="logs">
-        <h2>Workout History</h2>
+    return <section className="logs">
+        <div className="wrapper">
+          <h2>Workout History</h2>
 
-        {Object.entries(userData.completedWorkouts).map(completedWorkout => {
-          const workout = completedWorkout[1];
-          const workoutKey = completedWorkout[0];
-          return <HistoryItem workout={workout} workoutKey={workoutKey} />;
-        })}
+          {Object.entries(userData.completedWorkouts).map(
+            completedWorkout => {
+              const workout = completedWorkout[1];
+              const workoutKey = completedWorkout[0];
+              return (
+                <HistoryItem workout={workout} workoutKey={workoutKey} />
+              );
+            }
+          )}
 
-        <button onClick={goBack}>Go Back</button>
-      </section>
-    );
+          <button onClick={goHome}>Home</button>
+        </div>
+      </section>;
   }
 }
 

@@ -125,6 +125,10 @@ class Master extends Component {
     this.props.history.goBack();
   };
 
+  goHome = () => {
+    this.props.history.push("/dashboard")
+  }
+
   addWorkout = e => {
     e.preventDefault();
 
@@ -403,6 +407,18 @@ class Master extends Component {
             />
           )}
         />
+        <Route path="/history/:completedWorkoutKey" render={() => 
+          <History
+            goHome={this.goHome}
+            userData={userData}
+            uid={this.state.user.uid}
+          />} />
+        <Route path="/notesview/:workoutKey" render={() =>
+          <NotesView
+            goBack={this.goBack}
+            userData={userData}
+            uid={this.state.user.uid}
+          />} />
       </Switch>
     );
   }

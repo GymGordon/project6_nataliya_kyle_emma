@@ -1,9 +1,15 @@
-$headingText: "Bowlby One SC", cursive;
-$bodyText: "Nunito", sans-serif;
+$darkColor: #3b3b3b;
+$mainColor: #56a3b3;
+$accentColor: #f8cd1e;
+$lightBlack: #0000001a;
 
-$mainColor1: #3b3b3b;
-$mainColor2: #006882;
-$accentColor: #a4e000;
+
+// #f17753
+
+// keep box shadow vibes for inputs
+// MELISSA
+// #56a3b3
+// #f17753
 
 html {
   font-size: 62.5%;
@@ -20,10 +26,7 @@ body {
 }
 
 header {
-  // background: white;
-  background: rgba(63, 255, 140, 0.4);
-  background: #006882;
-  background: #4748f3;
+  background: $mainColor;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
   margin-bottom: 25px;
   text-align: center;
@@ -49,21 +52,32 @@ label {
 
 //Dashboard
 //Workouts
-.userInputContainer {
-  display: inline-block;
-  margin-bottom: 20px;
-  input {
-    float: left;
-    font-style: italic;
-    border: 3px solid rgba(63, 255, 140, 0.4);
-    border: 3px solid #006882;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-  }
+  .userInputContainer {
+    display: inline-block;
+    margin: 10px 0 20px 0;
+    height: 100%;
+    input {
+      width: 400px;
+      float: left;
+      font-style: italic;
+      border-left: none;
+      box-shadow: 1px 1px 2px $lightBlack;
+      border-radius: 5px 0 0 5px;
+      &:focus {
+        border: 1px solid $accentColor;
+      }
+    }
 }
 
-.test {
-  text-align: center;
+@media (max-width: 600px) {
+  .userInputContainer{
+    width: 100%;
+    input {
+      width: 100%;
+      border-radius: 3px;
+      border: 1px solid $lightBlack;
+    }
+  }
 }
 
 input {
@@ -102,12 +116,12 @@ fieldset {
   border-radius: 5px;
   h3 {
     float: left;
-    width: 33.33%;
+    width: 50%;
   }
   fieldset input {
     float: left;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    width: 33.33%;
+    width: 50%;
   }
 }
 

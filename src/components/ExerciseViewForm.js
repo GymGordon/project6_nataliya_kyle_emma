@@ -35,14 +35,14 @@ class ExerciseViewForm extends Component {
           onChange={e => exerciseUpdate(e, exerciseName, index)}
         />
 
-        <label className="visuallyhidden" htmlFor="completed">
+        {/* <label className="visuallyhidden" htmlFor="completed">
           Done
-        </label>
-        <input
+        </label> */}
+        {/* <input
           type="checkbox"
           id={`${exerciseName}Completed${index}`}
-          onClick={handleChecked}
-        />
+          onClick={handleChecked} */}
+        {/* /> */}
       </fieldset>
     );
   }

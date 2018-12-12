@@ -121,7 +121,7 @@ class ExerciseView extends Component {
 
               <h3>Weight</h3>
               <h3>Reps</h3>
-              <h3>Done</h3>
+              {/* <h3>Done</h3> */}
 
               {this.printExerciseViewForms(
                 exercise[1].exerciseSets,
@@ -137,6 +137,7 @@ class ExerciseView extends Component {
     }
 
     return <section className="exerciseView">
+    <div className="wrapper">
         <form action="" onSubmit={this.finishWorkout}>
           {userData && this.exerciseMap()}
 
@@ -146,7 +147,8 @@ class ExerciseView extends Component {
           <i class="fas fa-long-arrow-alt-left" />
           Go Back
         </button>
-      </section>;
+        </div>
+      </section>
   }
 }
 

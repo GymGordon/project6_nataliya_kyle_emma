@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.scss";
-import { BrowserRouter as Router } from "react-router-dom";
+import firebase from "firebase";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import Master from "./components/Master";
 import Nav from "./components/Nav";
 
@@ -28,9 +29,7 @@ class App extends Component {
           </header>
 
           <main>
-            <div className="wrapper">
-              <Master history={this.props.history} />
-            </div>
+            <Master history={this.props.history} />
           </main>
           {/* <footer>
             <p>This is a footer</p>

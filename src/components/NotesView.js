@@ -15,7 +15,7 @@ class NotesView extends Component {
     const workoutInfo = userData.completedWorkouts[workoutKey];
 
     return (
-      <div>
+      <div className="wrapper">
         <h3>{workoutInfo.date}</h3>
         <h2>{workoutInfo.routineName}</h2>
         <h2>{workoutInfo.workoutName}</h2>
