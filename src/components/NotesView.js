@@ -8,14 +8,19 @@ class NotesView extends Component {
   }
 
   render() {
-    const { userData } = this.props;
+    const { userData, goBack } = this.props;
 
     const workoutKey = this.props.match.params.workoutKey;
 
     const workoutInfo = userData.completedWorkouts[workoutKey];
 
-    return <section className="notesView">
+    return (
+      <section className="notesView">
         <div className="wrapper">
+          <button className="btn--goBack" onClick={goBack}>
+            <i class="fas fa-long-arrow-alt-left" />
+            Go Back
+          </button>
           <div class="exerciseCard">
             <h2>
               {workoutInfo.routineName}: {workoutInfo.workoutName}
@@ -28,7 +33,8 @@ class NotesView extends Component {
             return <CompletedExercise exercise={exercise} />;
           })}
         </div>
-      </section>;
+      </section>
+    );
   }
 }
 

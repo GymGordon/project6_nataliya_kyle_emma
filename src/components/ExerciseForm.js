@@ -10,9 +10,10 @@ class ExerciseForm extends Component {
     return (
       <div className="clearfix">
         <fieldset className="exerciseCard clearfix">
-          <div className="exerciseInput ">
+          <div className="exerciseInputs">
           <label htmlFor="exerciseName">Exercise</label>
             <input
+              className="addExerciseInput"
               required
               onChange={handleChange}
               type="text"
@@ -24,6 +25,7 @@ class ExerciseForm extends Component {
           <div className="exerciseInputs">
           <label htmlFor="exerciseSets">Sets</label>
             <input
+              className="addExerciseInput"
               required
               onChange={handleChange}
               type="text"
@@ -35,6 +37,7 @@ class ExerciseForm extends Component {
           <div className="exerciseInputs">
           <label htmlFor="exerciseReps">Reps</label>
             <input
+              className="addExerciseInput"
               required
               onChange={handleChange}
               type="text"

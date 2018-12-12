@@ -50,15 +50,23 @@ fieldset {
 }
 
 .exerciseInputs {
-  width: 33.33%;
+  width: calc(33.33% - 40px);
   float: left;
+  margin: 0 20px;
+  .addExerciseInput {
+    width: 100%;
+  }
 }
 
-// ADD EXERCISES
-.exerciseLabels {
-  label {
-    float: left;
-    width: 33.33%;
+@media (max-width: 600px) {
+  .exerciseInputs {
+    width: 100%;
+    float: none;
+    margin: 0 0;
+    .addExerciseInput {
+      width: 100%;
+      margin: 0 0 0 0;
+    }
   }
 }
 
@@ -94,7 +102,7 @@ fieldset {
   border-radius: 5px;
   input {
     border: 1px solid rgba(0, 0, 0, 0.2);
-    margin: 0 10px;
+    // margin: 0 10px;
   }
 }
 

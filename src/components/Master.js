@@ -15,10 +15,6 @@ import Sidebar from "./Sidebar";
 const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
-// PURPOSE OF MASTER :
-// handle logging in and out
-// rendering routes
-
 class Master extends Component {
   constructor() {
     super();
@@ -135,6 +131,7 @@ class Master extends Component {
 
   goHome = () => {
     this.props.history.push("/dashboard")
+    console.log("stuffs");
   }
 
   addWorkout = e => {
@@ -413,16 +410,6 @@ class Master extends Component {
           )}
         />
         <Route
-          path="/history/:completedWorkoutKey"
-          render={() => (
-            <History
-              goBack={this.goBack}
-              userData={userData}
-              uid={this.state.uid}
-            />
-          )}
-        />
-        <Route
           path="/notesview/:workoutKey"
           render={() => (
             <NotesView
@@ -438,12 +425,6 @@ class Master extends Component {
             userData={userData}
             uid={this.state.uid}
           />} />
-        <Route path="/notesview/:workoutKey" render={() =>
-          <NotesView
-            goBack={this.goBack}
-            userData={userData}
-            uid={this.state.uid}
-          />} />  
       </Switch>
     );
   }

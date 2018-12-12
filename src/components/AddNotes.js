@@ -44,9 +44,6 @@ class AddNotes extends Component {
           <div>
             <div className="exerciseCard headline">
               <h2>Workout Summary</h2>
-              {/* <h2>
-                {workoutSummary.routineName}: {workoutSummary.workoutName}
-              </h2> */}
 
               <p>{workoutSummary.date}</p>
             </div>
