@@ -1,54 +1,15 @@
-$darkColor: #3b3b3b;
-$mainColor: #56a3b3;
-$accentColor: #f8cd1e;
-$lightBlack: #0000001a;
-
-
-// #f17753
-
-// keep box shadow vibes for inputs
-// MELISSA
-// #56a3b3
-// #f17753
-
-html {
-  font-size: 62.5%;
-}
-
-.App {
-  text-align: center;
-}
-
-body {
-  background: #f5f9fe;
-  color: #3b3b3b;
-}
-
-header {
-  background: $mainColor;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 25px;
-  text-align: center;
-  color: white;
-}
-
-.wrapper {
-  width: 95vw;
-  max-width: 1280px;
-  margin: 0 auto;
-  border: 1px solid red;
-}
-
-@media (max-width: 450px) {
-  .wrapper {
-    width: 100vw;
-  }
-}
-
 label {
   display: block;
   margin: 10px 0;
 }
+
+
+input {
+  padding: 15px 10px;
+  text-align: center;
+  border: none;
+}
+
 
 //Dashboard
 //Workouts
@@ -78,12 +39,6 @@ label {
       border: 1px solid $lightBlack;
     }
   }
-}
-
-input {
-  padding: 15px 10px;
-  text-align: center;
-  border: none;
 }
 
 input[type="submit"] {
@@ -124,10 +79,11 @@ fieldset {
     width: 100%;
     // border: 1px solid blue;
     .exerciseDetails {
-      // border: 1px solid red;
+    //   border: 1px solid red;
     }
     input {
       border: 1px solid rgba(0, 0, 0, 0.2);
+      margin: 0 10px;
     }
   }
 }
@@ -139,39 +95,4 @@ fieldset {
        margin-bottom: 10px;
     }
   }
-}
-
-
-
-
-
-
-
-
-
-
-.not-visible {
-  transform: translateX(-100%);
-}
-
-.visible {
-  transform: translateX(0);
-}
-
-.sideBar {
-  position: absolute;
-  // top: 50.5px;
-  width: 50%;
-  z-index: 1000;
-  height: calc(100vh - 50.5px);
-  background: lightblue;
-  text-align: left;
-  transition: transform 0.4s ease-in;
-}
-
-.nav {
-  .burger {
-    display: inline-block;
-  }
-  // float: left;
 }

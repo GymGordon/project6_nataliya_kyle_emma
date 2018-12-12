@@ -119,8 +119,8 @@ class ExerciseView extends Component {
             <div key={exercise[0]} className="exerciseCard clearfix">
               <h2>{exercise[1].exerciseName}</h2>
 
-              <h3>Weight</h3>
-              <h3>Reps</h3>
+              {/* <h3>Weight</h3> */}
+              {/* <h3>Reps</h3> */}
               {/* <h3>Done</h3> */}
 
               {this.printExerciseViewForms(
