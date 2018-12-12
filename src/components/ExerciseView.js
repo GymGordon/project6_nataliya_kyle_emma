@@ -57,8 +57,6 @@ class ExerciseView extends Component {
     });
   };
 
-  
-
   // FINISH WORKOUT
 
   finishWorkout = e => {
@@ -83,12 +81,15 @@ class ExerciseView extends Component {
           .push(this.state.completedWorkout).key;
 
         // re-direct
-        this.props.history.push(`/addnotes/${routineKey}/${workoutKey}/${completedWorkoutKey}`);
+        this.props.history.push(
+          `/addnotes/${routineKey}/${workoutKey}/${completedWorkoutKey}`
+        );
       }
     );
   };
 
   render() {
+    
     const { userData, goBack } = this.props;
 
     if (userData) {
@@ -119,8 +120,8 @@ class ExerciseView extends Component {
             <div key={exercise[0]} className="exerciseCard clearfix">
               <h2>{exercise[1].exerciseName}</h2>
 
-              <h3>Weight</h3>
-              <h3>Reps</h3>
+              {/* <h3>Weight</h3> */}
+              {/* <h3>Reps</h3> */}
               {/* <h3>Done</h3> */}
 
               {this.printExerciseViewForms(
@@ -136,19 +137,22 @@ class ExerciseView extends Component {
       };
     }
 
-    return <section className="exerciseView">
-    <div className="wrapper">
-        <form action="" onSubmit={this.finishWorkout}>
-          {userData && this.exerciseMap()}
+    return (
+      <section className="exerciseView">
+        <div className="wrapper">
+          <button className="btn--goBack" onClick={goBack}>
+            <i class="fas fa-long-arrow-alt-left" />
+            Go Back
+          </button>
+          <form action="" onSubmit={this.finishWorkout}>
+            {userData && this.exerciseMap()}
 
-          <input className="btn--save" type="submit" value="Finish Workout" />
-        </form>
-        <button className="btn--goBack" onClick={goBack}>
-          <i class="fas fa-long-arrow-alt-left" />
-          Go Back
-        </button>
+            <input className="btn--save" type="submit" value="Finish Workout" />
+          </form>
+          
         </div>
       </section>
+    );
   }
 }
 
