@@ -56,7 +56,7 @@ class AddNotes extends Component {
     }
 
     return (
-      <div className="notes">
+      <div className="wrapper">
         <h2>Notes</h2>
           <textarea
             onChange={this.handleChange}
@@ -70,10 +70,6 @@ class AddNotes extends Component {
         <form action="" onSubmit={this.saveNotes}>
           <input type="submit" className="btn--save" value="Okay" />
         </form>
-        <button className="btn--goBack" onClick={goBack}>
-          <i class="fas fa-long-arrow-alt-left" />
-          Go Back
-        </button>
       </div>
     );
   }

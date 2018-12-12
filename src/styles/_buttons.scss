@@ -3,6 +3,24 @@ button {
   border: none;
 }
 
+.add {
+  background: $accentColor;
+  height: 100%;
+  padding: 15px 10px;
+  float: left;
+  border-radius: 0 4px 4px 0;
+  box-shadow: 1px 1px 2px $lightBlack;
+}
+
+@media (max-width: 600px) {
+  .add {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 4px;
+  }
+}
+
+
 .btn--add {
   margin-left: 10px;
   padding-top: 12px;
@@ -10,9 +28,8 @@ button {
   .fa-plus {
     margin-left: 15px;
     font-size: 3rem;
-    padding: 7px 0;
-    color: #006882;
-    color: #64d38e;
+    padding: 2px 0;
+    color: $accentColor;
   }
 }
 
@@ -23,15 +40,13 @@ button {
   float: left;
   margin: 8px 10px;
   background: white;
-  padding: 20px;
+  padding: 40px 20px;
   border-radius: 4px;
   text-align: left;
-  height: 90px;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  transition: width .35s ease;
   &:hover {
-    background: rgba(63, 255, 140, 0.4);
-      background: rgba(0, 104, 130, 0.2);
-
+    background-color: $accentColor;
   }
   &:hover .fa-angle-right {
     color: #3b3b3b;
@@ -47,17 +62,10 @@ button {
 
 @media (max-width: 600px) {
   .btn--goTo {
-    //   border: 1px solid red;
-    padding: 20px;
-    border-radius: 4px;
     width: 100%;
-    float: none;
     margin: 8px 0;
-    height: 90px;
+    float: none;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    &:hover {
-      background: rgba(63, 255, 140, 0.4);
-    }
     &:hover .fa-angle-right {
       color: #3b3b3b;
     }
@@ -92,11 +100,3 @@ button {
     margin-right: 15px;
   }
 }
-
-
-
-
-// keep box shadow vibes for inputs
-// MELISSA
-// #56a3b3
-// #f17753
