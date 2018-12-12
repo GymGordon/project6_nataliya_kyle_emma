@@ -5,10 +5,9 @@ $mainColor1: #3b3b3b;
 $mainColor2: #006882;
 $accentColor: #a4e000;
 
-
-
 html {
   font-size: 62.5%;
+  overflow: hidden;
 }
 
 .App {
@@ -50,17 +49,17 @@ label {
 
 //Dashboard
 //Workouts
-  .userInputContainer {
-    display: inline-block;
-    margin-bottom: 20px;
-    input {
-      float: left;
-      font-style: italic;
-      border: 3px solid rgba(63, 255, 140, 0.4);
-      border: 3px solid #006882;
-      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-    }
+.userInputContainer {
+  display: inline-block;
+  margin-bottom: 20px;
+  input {
+    float: left;
+    font-style: italic;
+    border: 3px solid rgba(63, 255, 140, 0.4);
+    border: 3px solid #006882;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
 }
 
 .test {
@@ -110,4 +109,30 @@ fieldset {
     border: 1px solid rgba(0, 0, 0, 0.2);
     width: 33.33%;
   }
+}
+
+.not-visible {
+  transform: translateX(-100%);
+}
+
+.visible {
+  transform: translateX(0);
+}
+
+.sideBar {
+  position: absolute;
+  // top: 50.5px;
+  width: 50%;
+  z-index: 1000;
+  height: calc(100vh - 50.5px);
+  background: lightblue;
+  text-align: left;
+  transition: transform 0.4s ease-in;
+}
+
+.nav {
+  .burger {
+    display: inline-block;
+  }
+  // float: left;
 }

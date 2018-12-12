@@ -57,6 +57,8 @@ class ExerciseView extends Component {
     });
   };
 
+  
+
   // FINISH WORKOUT
 
   finishWorkout = e => {

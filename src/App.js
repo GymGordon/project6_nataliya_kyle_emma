@@ -1,20 +1,29 @@
 import React, { Component } from "react";
 import "./App.scss";
-import firebase from "firebase";
 import { BrowserRouter as Router } from "react-router-dom";
 import Master from "./components/Master";
+import Nav from "./components/Nav";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      menuIsOpen: false
+    };
+  }
+  toggleMenu = () => {
+    this.setState({ menuIsOpen: !this.state.menuIsOpen });
+  };
   render() {
-    // router
-    // render master
-
     return (
       <Router>
         <div className="App">
           <header>
-            <div className="wrapper">
-              <h1>FleX Fitness</h1>
+            <div>
+              <Nav
+                toggleMenu={this.toggleMenu}
+                isOpen={this.state.menuIsOpen}
+              />
             </div>
           </header>
 
