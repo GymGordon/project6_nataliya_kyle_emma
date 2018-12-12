@@ -13,6 +13,7 @@ $lightBlack: #0000001a;
 
 html {
   font-size: 62.5%;
+  overflow: hidden;
 }
 
 .App {
@@ -122,4 +123,30 @@ fieldset {
     border: 1px solid rgba(0, 0, 0, 0.2);
     width: 50%;
   }
+}
+
+.not-visible {
+  transform: translateX(-100%);
+}
+
+.visible {
+  transform: translateX(0);
+}
+
+.sideBar {
+  position: absolute;
+  // top: 50.5px;
+  width: 50%;
+  z-index: 1000;
+  height: calc(100vh - 50.5px);
+  background: lightblue;
+  text-align: left;
+  transition: transform 0.4s ease-in;
+}
+
+.nav {
+  .burger {
+    display: inline-block;
+  }
+  // float: left;
 }
