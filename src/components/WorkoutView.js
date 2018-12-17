@@ -20,7 +20,7 @@ class WorkoutView extends Component {
     return <section className="workoutView">
         <div className="wrapper">
           <button className="btn--goBack" onClick={goBack}>
-            <i class="fas fa-long-arrow-alt-left" />
+            <i className="fas fa-long-arrow-alt-left" />
             Go Back
           </button>
 
@@ -28,7 +28,7 @@ class WorkoutView extends Component {
               {this.workoutArray.map(workout => {
                 return <button className="btn--goTo" key={workout[0]} id={workout[0]} onClick={viewExercises}>
                     {workout[1].workoutName}
-                    <i class="fas fa-angle-right" />
+                    <i className="fas fa-angle-right" />
                   </button>;
               })}
             </div>}

@@ -18,10 +18,10 @@ class NotesView extends Component {
       <section className="notesView">
         <div className="wrapper">
           <button className="btn--goBack" onClick={goBack}>
-            <i class="fas fa-long-arrow-alt-left" />
+            <i className="fas fa-long-arrow-alt-left" />
             Go Back
           </button>
-          <div class="exerciseCard">
+          <div className="exerciseCard">
             <h2>
               {workoutInfo.routineName}: {workoutInfo.workoutName}
             </h2>

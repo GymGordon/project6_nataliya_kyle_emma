@@ -6,22 +6,19 @@ class HistoryItem extends Component {
     super(props);
   }
 
-  viewNotes = (e) => {
-
-      const workoutKey = e.target.id
-
-      // Re-direct
-      this.props.history.push(`/notesview/${workoutKey}`);
+  viewNotes = (e, workoutKey) => {
+    // Re-direct
+    this.props.history.push(`/notesview/${workoutKey}`);
   };
   render() {
     const { workout, workoutKey } = this.props;
 
-    return <button className="btn--goTo" id={workoutKey} onClick={this.viewNotes}>
+    return <button className="btn--goTo" id={workoutKey} onClick={(e) => this.viewNotes(e, workoutKey)}>
         <h3 className="date">{workout.date}</h3>
         <h2>
           {workout.routineName} -- {workout.workoutName}
         </h2>
-        <i class="fas fa-angle-right" />
+        <i className="fas fa-angle-right" />
       </button>;
   }
 }

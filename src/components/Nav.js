@@ -21,7 +21,7 @@ class Nav extends Component {
     const { open } = this.state;
 
     return <nav className="clearfix">
-        <div className="nav">
+        <div className="nav wrapper">
           <Link to="/dashboard">
             <h1>FleX Fitness</h1>
           </Link>
@@ -29,7 +29,7 @@ class Nav extends Component {
             <HamburgerMenu isOpen={open} menuClicked={this.handleClick} width={18} height={15} strokeWidth={1} rotate={0} color="black" borderRadius={0} animationDuration={0.5} />
           </div>
 
-          <Sidebar handleClick={this.handleClick} currentState={open === true ? "visible" : "not-visible"} />
+        <Sidebar logIn={this.props.logIn} logOut={this.props.logOut} guestLogin={this.props.guestLogin} handleClick={this.handleClick} currentState={open === true ? "visible" : "not-visible"} />
         </div>
       </nav>;
   }

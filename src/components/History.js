@@ -10,8 +10,8 @@ class History extends Component {
 
     return <section className="history">
         <div className="wrapper">
-        <button className="btn--goHome" onClick={this.props.goHome}>
-          <i class="fas fa-long-arrow-alt-left" />
+        <button className="btn--goHome" onClick={goHome}>
+          <i className="fas fa-long-arrow-alt-left" />
           Go Home
           </button>
           <h2>Workout History</h2>

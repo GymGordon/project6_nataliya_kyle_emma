@@ -9,7 +9,7 @@ class Dashboard extends Component {
     const { userData, goToRoutine, handleChange, addRoutine } = this.props;
 
     return <section className="dashboard">
-        {userData && <div class="wrapper">
+        {userData && <div className="wrapper">
         <h2 className="tagline">Build a Custom Gym Routine</h2>
             <form action="" onSubmit={addRoutine}>
               <div className="userInputContainer clearfix">
@@ -33,11 +33,11 @@ class Dashboard extends Component {
                       className="btn--goTo"
                       key={user[0]}
                       id={user[0]}
-                      onClick={goToRoutine}
+                      onClick={(e)=> goToRoutine(e, user[0])}
                     >
                       <div className="goTo clearfix">
                         {user[1].routineName}
-                        <i class="fas fa-angle-right" />
+                        <i className="fas fa-angle-right" />
                       </div>
                     </button>
                   )

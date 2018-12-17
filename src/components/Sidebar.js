@@ -10,11 +10,11 @@ const Sidebar = props => {
             Dashboard
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/history" className="link" onClick={props.handleClick}>
             History
           </Link>
-        </li>
+        </li> */}
         <li>  
           <Link to="/" className="link" onClick={props.logOut}>
             Logout

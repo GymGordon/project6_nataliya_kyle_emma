@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Login extends Component {
   render() {
-    const { logIn, logOut } = this.props;
+    const { logIn, logOut, guestLogin } = this.props;
 
     return <section className="login">
         <div className="wrapper">
@@ -12,9 +12,10 @@ class Login extends Component {
             <button className="btn--login" onClick={logIn}>
               Login
             </button>
-            <button className="btn--logout" onClick={logOut}>
+            {/* <button className="btn--logout" onClick={logOut}>
               Log Out
-            </button>
+            </button> */}
+          <button className="btn--guest" onClick={guestLogin}>Guest Login</button>
           </div>
         </div>
       </section>;
