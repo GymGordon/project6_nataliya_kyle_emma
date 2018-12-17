@@ -137,7 +137,7 @@ class ExerciseView extends Component {
       <section className="exerciseView">
         <div className="wrapper">
           <button className="btn--goBack" onClick={goBack}>
-            <i class="fas fa-long-arrow-alt-left" />
+            <i className="fas fa-long-arrow-alt-left" />
             Go Back
           </button>
           <form action="" onSubmit={this.finishWorkout}>

@@ -129,7 +129,8 @@ button {
 }
 
 .btn--login,
-.btn--logout {
+.btn--logout,
+.btn--guest {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
@@ -137,13 +138,23 @@ button {
   border-radius: none;
   padding: 15px 10px;
   display: block;
+  font-weight: 700;
   transition: background-color 0.25s ease;
+  border-bottom: 3px solid transparent;
+
 }
+
+.btn--guest {
+  border: 1px solid black;
+  &:hover {
+    background: $darkColor;
+  }
+}
+
 .btn--login {
   background: $accentColor;
   &:hover {
     background: darken($accentColor, 25%);
-    font-weight: 700;
   }
 }
 .btn--logout {

@@ -10,16 +10,16 @@ import ExerciseView from "./ExerciseView";
 import AddNotes from "./AddNotes";
 import NotesView from "./NotesView";
 import History from "./History";
-import Sidebar from "./Sidebar";
+// import Sidebar from "./Sidebar";
 
-const provider = new firebase.auth.GoogleAuthProvider();
+// const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
 class Master extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      user: null,
+      user: this.props.user,
       routineCounter: 0,
       exerciseCounter: 1,
       workoutCounter: 0,
@@ -58,32 +58,37 @@ class Master extends Component {
       this.dbRef.off();
     }
   }
-  // LOGIN FUNCTIONS
+  // // LOGIN FUNCTIONS
 
-  logIn = () => {
-    auth.signInWithPopup(provider).then(result => {
-      this.setState({
-        user: result.user,
-        uid: result.user.uid
-      });
-    });
-  };
+  // logIn = () => {
+  //   auth.signInWithPopup(provider).then(result => {
+  //     this.setState({
+  //       user: result.user,
+  //       uid: result.user.uid
+  //     });
+  //   });
+  // };
 
-  logOut = () => {
-    auth.signOut().then(() => {
-      this.setState({
-        user: null
-      });
-    });
-  };
+  // logOut = () => {
+  //   auth.signOut().then(() => {
+  //     this.setState({
+  //       user: null
+  //     });
+  //   });
+  // };
+
+  // guestLogin = () => {
+  //   console.log("works");
+  //   firebase.auth().signInAnonymously();
+  // }
 
   updateKey(key, value) {
-  // update react state
-  this.setState({ [key]: value });
+    // update react state
+    this.setState({ [key]: value });
 
-  // update localStorage
-  localStorage.setItem(key, value);
-}
+    // update localStorage
+    localStorage.setItem(key, value);
+  }
 
   // CONTROLLED INPUTS
 
@@ -130,9 +135,9 @@ class Master extends Component {
   };
 
   goHome = () => {
-    this.props.history.push("/dashboard")
+    this.props.history.push("/dashboard");
     console.log("stuffs");
-  }
+  };
 
   addWorkout = e => {
     e.preventDefault();
@@ -271,16 +276,10 @@ class Master extends Component {
 
   // GO TO ROUTINE
 
-  goToRoutine = e => {
-    const routineKey = e.target.id;
-    this.setState({
-      routineKey
-    });
-
-    this.updateKey("routineKey", routineKey)
-    this.updateKey("uid", this.state.user.uid)
-    
-    this.props.history.push(`/workoutview/${routineKey}`);
+   goToRoutine = (e, key) => {
+    this.updateKey("routineKey", key);
+    this.updateKey("uid", this.state.user.uid);
+    this.props.history.push(`/workoutview/${key}`)
   };
 
   // VIEW EXERCISE
@@ -288,19 +287,14 @@ class Master extends Component {
   viewExercises = e => {
     const workoutKey = e.target.id;
 
-    let storedRoutineKey = localStorage.getItem('routineKey');
+    let storedRoutineKey = localStorage.getItem("routineKey");
     this.state = {
       routineKey: storedRoutineKey
     };
 
-
-
     this.setState({
       workoutKey
     });
-
-
-
 
     //direct user to exerciseview component
     this.props.history.push(
@@ -327,7 +321,11 @@ class Master extends Component {
           path="/"
           render={() =>
             !this.state.user ? (
-              <Login logIn={this.logIn} logOut={this.logOut} />
+              <Login
+                logIn={this.props.logIn}
+                logOut={this.props.logOut}
+                guestLogin={this.props.guestLogin}
+              />
             ) : (
               <Redirect to="/dashboard" />
             )
@@ -337,6 +335,13 @@ class Master extends Component {
           exact
           path="/dashboard"
           render={() => (
+            !this.state.user ? (
+              <Login
+                logIn={this.props.logIn}
+                logOut={this.props.logOut}
+                guestLogin={this.props.guestLogin}
+              />
+            ) : (
             <Dashboard
               addRoutine={this.addRoutine}
               handleChange={this.handleChange}
@@ -344,7 +349,7 @@ class Master extends Component {
               userData={userData}
               goToRoutine={this.goToRoutine}
               goBack={this.goBack}
-            />
+            />)
           )}
         />
         <Route
@@ -419,12 +424,16 @@ class Master extends Component {
             />
           )}
         />
-        <Route path="/history/:completedWorkoutKey" render={() => 
-          <History
-            goHome={this.goHome}
-            userData={userData}
-            uid={this.state.uid}
-          />} />
+        <Route
+          path="/history/:completedWorkoutKey"
+          render={() => (
+            <History
+              goHome={this.goHome}
+              userData={userData}
+              uid={this.state.uid}
+            />
+          )}
+        />
       </Switch>
     );
   }
